@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <parent>
+    <relativePath>../poms/compiled/</relativePath>
+    <groupId>eu.aniketos.wp3.components.spdm.project.build</groupId>
+    <artifactId>compiled-bundle-settings</artifactId>
+    <version>1.0</version>
+  </parent>
+
+  <properties>
+    <bundle.symbolicName>eu.aniketos.wp3.components.ui-bundle</bundle.symbolicName>
+    <bundle.namespace>eu.aniketos.wp3.spdm.ui.entry</bundle.namespace>
+  </properties>
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>eu.aniketos.wp3.components</groupId>
+  <artifactId>ui-bundle</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>${bundle.symbolicName} [${bundle.namespace}]</name>
+
+  <packaging>bundle</packaging>
+
+  <dependencies>
+    <!--
+     | uncomment to add all imported (non-local) bundles to your compilation classpath
+    <dependency>
+      <type>pom</type>
+      <groupId>${parent.groupId}</groupId>
+      <artifactId>provision</artifactId>
+      <optional>true</optional>
+    </dependency>
+    -->
+
+<dependency>
+  <groupId>eu.aniketos.wp3.components.spdm</groupId>
+  <artifactId>ds-datatype-bundle</artifactId>
+  <version>1.0-SNAPSHOT</version>
+</dependency>
+
+<dependency>
+  <groupId>eu.aniketos.wp3.components.spdm</groupId>
+  <artifactId>ds-impl-bundle</artifactId>
+  <version>1.0-SNAPSHOT</version>
+</dependency>
+
+
+    <dependency>
+          <groupId>swt</groupId>
+          <artifactId>jface</artifactId>
+          <version>3.0.1</version>
+    </dependency>
+
+<dependency>
+  <groupId>org.mod4j.org.eclipse</groupId>
+  <artifactId>jface</artifactId>
+  <version>3.5.0</version>
+</dependency>
+
+<dependency>
+	<groupId>org.eclipse.core</groupId>
+	<artifactId>commands</artifactId>
+	<version>3.3.0-I20070605-0010</version>
+</dependency>
+            
+
+<dependency>
+    <groupId>org.mod4j.org.eclipse</groupId>
+    <artifactId>swt</artifactId>
+    <version>3.5.0</version>
+</dependency>
+
+<dependency>
+    <groupId>swt</groupId>
+    <artifactId>jface</artifactId>
+    <version>3.0.1</version>
+</dependency>
+
+   <dependency>
+<groupId>org.mod4j.org.eclipse.ui</groupId>
+<artifactId>workbench</artifactId>
+<version>3.5.0</version>
+    </dependency>
+
+
+    <dependency>
+          <groupId>swt</groupId>
+          <artifactId>swt-linux-gtk</artifactId>
+          <version>3.0.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi_R4_core</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi_R4_compendium</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+<dependency>
+	<groupId>org.apache.felix</groupId>
+	<artifactId>org.osgi.compendium</artifactId>
+	<version>1.4.0</version>
+</dependency>
+            
+
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.osgi.core</artifactId>
+      <version>1.4.0</version>
+    </dependency>  
+
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.0</version>
+    </dependency>
+
+    <dependency>
+	  <groupId>swt</groupId>
+	  <artifactId>jface</artifactId>
+	  <version>3.0.1</version>
+    </dependency>
+    
+    <dependency>
+	  <groupId>swt</groupId>
+	  <artifactId>osgi</artifactId>
+	  <version>3.0.1</version>
+    </dependency>
+
+    <dependency>
+	  <groupId>swt</groupId>
+	  <artifactId>runtime</artifactId>
+	  <version>3.0.1</version>
+    </dependency>
+    
+    <dependency>
+	  <groupId>swt</groupId>
+	  <artifactId>swt-linux-gtk</artifactId>
+	  <version>3.0.1</version>
+    </dependency>
+
+<!--
+    <dependency>
+	  <groupId>org.eclipse.ui</groupId>
+	  <artifactId>ide</artifactId>
+	  <version>3.3.0-I20070620</version>
+    </dependency>
+    
+    <dependency>
+	  <groupId>org.eclipse</groupId>
+	  <artifactId>ui</artifactId>
+	  <version>3.3.0-I20070614-0800</version>
+    </dependency>
+-->
+</dependencies>
+
+  <repositories>
+    <repository>
+      <id>com.springsource.repository.bundles.release</id>
+      <name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
+      <url>http://repository.springsource.com/maven/bundles/release</url>
+    </repository>
+    <repository>
+      <id>com.springsource.repository.bundles.external</id>
+      <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
+      <url>http://repository.springsource.com/maven/bundles/external</url>
+    </repository>
+  </repositories>
+</project>
