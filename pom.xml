@@ -64,7 +64,7 @@
       <plugin>
         <groupId>org.ops4j</groupId>
         <artifactId>maven-pax-plugin</artifactId>
-        <version>1.3</version>
+        <version>1.4</version>
         <configuration>
           <!--
            | some example Pax-Runner settings
@@ -94,6 +94,7 @@
           <target>1.6</target>
         </configuration>
       </plugin>
+<!--
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-scr-plugin</artifactId>
@@ -107,6 +108,7 @@
           </execution>
         </executions>
       </plugin>
+-->
       <!-- Bundle Plugins plus for Log Service -->
     </plugins>
   </build>
