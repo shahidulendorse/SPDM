@@ -50,7 +50,7 @@
   <modules>
     <module>poms</module>
     <module>provision</module>
-    <module>ds-api-bundle</module>
+ <!--   <module>ds-api-bundle</module> -->
     <module>ds-impl-bundle</module>
     <module>ds-test-bundle</module>
     <module>ds-datatype-bundle</module>
