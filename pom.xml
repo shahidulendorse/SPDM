@@ -53,7 +53,7 @@
  <!--   <module>ds-api-bundle</module> -->
     <module>ds-impl-bundle</module>
     <module>ds-test-bundle</module>
-    <module>ds-datatype-bundle</module>
+<!--    <module>ds-datatype-bundle</module> -->
     <module>ds-dao-bundle</module>
     <module>driver-bundle</module>
 <!--    <module>ui-bundle</module> -->
@@ -94,7 +94,6 @@
           <target>1.6</target>
         </configuration>
       </plugin>
-<!--
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-scr-plugin</artifactId>
@@ -108,7 +107,6 @@
           </execution>
         </executions>
       </plugin>
--->
       <!-- Bundle Plugins plus for Log Service -->
     </plugins>
   </build>
