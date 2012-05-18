@@ -59,7 +59,10 @@
 <!--    <module>ui-bundle</module> -->
  </modules>
 
-  <build>
+
+
+
+<build>
     <plugins>
       <plugin>
         <groupId>org.ops4j</groupId>
@@ -85,7 +88,13 @@
           -->
         </executions>
       </plugin>
-      <plugin>
+    
+
+
+
+
+
+  <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.3.2</version>
@@ -110,6 +119,33 @@
       <!-- Bundle Plugins plus for Log Service -->
     </plugins>
   </build>
+  
+      <!-- Added by jtynan@tssg.org to get hudson to compile this work package -->
+<profiles>
+<profile>
+<id>hudson</id>
+
+<build>
+    <plugins>
+      <plugin>
+        <groupId>org.ops4j</groupId>
+        <artifactId>maven-pax-plugin</artifactId>
+        <version>1.5</version>
+        <configuration>
+          <provision>
+            <param>--platform=felix</param>
+          </provision>
+        </configuration>
+        <executions>
+        </executions>
+      </plugin>
+    
+    </plugins>
+</build>
+
+</profile>
+</profiles>
+
 <dependencies>
 
 <dependency>
