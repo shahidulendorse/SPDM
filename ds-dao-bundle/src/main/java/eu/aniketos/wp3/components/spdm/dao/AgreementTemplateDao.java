@@ -7,7 +7,7 @@ import eu.aniketos.data.IAgreementTemplate;
 /**
  * Data Access Object interface for AgreementTemplate
  *
- * @author: bbutler
+ * @author: Bernard Butler
  */
 public interface AgreementTemplateDao {
 	public abstract void updateAgreementTemplate(IAgreementTemplate agreementTemplate);

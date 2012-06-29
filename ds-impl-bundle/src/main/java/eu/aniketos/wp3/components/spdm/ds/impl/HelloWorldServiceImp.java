@@ -15,7 +15,11 @@ import eu.aniketos.wp3.components.spdm.ds.api.HelloWorldService;
 
 //import org.apache.log4j.Logger;
 //import org.osgi.service.log.LogService;
-
+/**
+ * 
+ * @author Bernard Butler
+ *
+ */
 
 
 @Component(name = "hello-service")@Service
@@ -51,7 +55,10 @@ public class HelloWorldServiceImp implements HelloWorldService {
 //    private LogService log;
 	// static Logger log = Logger.getLogger(HelloWorldServiceImp.class);
 
-	   
+	/**
+	 * Resgiter @HelloWorld Service   
+	 * @param context
+	 */
 	@Activate
 	protected void activateHelloWorld(ComponentContext context) {
 		// log.debug("Activate ReferenceManager");
@@ -61,6 +68,10 @@ public class HelloWorldServiceImp implements HelloWorldService {
 		// @TODO
 	}
 
+	/**
+	 * UndBind @HelloWorld service
+	 * @param context
+	 */
 	@Deactivate
 	protected void deactivateHelloWorld(ComponentContext context) {
 		// log.debug("Deactivate ReferenceManager");
@@ -69,6 +80,9 @@ public class HelloWorldServiceImp implements HelloWorldService {
 	    //@TODO
 	}
 	
+	/**
+	 * 
+	 */
 	public String helloWorld() {
 //	    log.log(LogService.LOG_INFO, "Calling method HelloWorld!");
 		return "Hello TSSG";

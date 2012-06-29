@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+
+  
+   <modelVersion>4.0.0</modelVersion>
+ 	<groupId>eu.aniketos.wp3.components.spdm.jpa</groupId>    
+ 	<artifactId>persistence-model</artifactId>
+    <version>1.0.0-SNAPSHOT</version>    
+    <name>${bundle.symbolicName} [${bundle.namespace}]</name>
+    
+    <packaging>bundle</packaging>
+  	
+
+  	
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jpa_2.0_spec</artifactId>
+            <version>1.1</version>
+        </dependency>
+              <dependency>
+                    <groupId>org.apache.openjpa</groupId>
+                    <artifactId>openjpa</artifactId>
+                    <version>2.1.0</version>
+                </dependency>
+<dependency>
+
+<groupId>org.apache.derby</groupId>
+<artifactId>derby</artifactId>
+<version>10.8.1.2</version>
+</dependency>
+
+<dependency>
+	<groupId>org.apache.servicemix.bundles</groupId>
+	<artifactId>org.apache.servicemix.bundles.commons-dbcp</artifactId>
+	<version>1.4_1</version>
+</dependency>
+
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>com.springsource.org.apache.commons.collections</artifactId>
+    <version>3.2.1</version>
+</dependency>
+
+<dependency>
+	<groupId>commons-pool</groupId>
+	<artifactId>commons-pool</artifactId>
+	<version>1.5.5</version>
+</dependency>
+
+<dependency>
+	<groupId>commons-lang</groupId>
+	<artifactId>commons-lang</artifactId>
+	<version>2.6</version>
+</dependency>
+
+              
+    </dependencies>
+
+    <properties>
+        <extra.packages>*</extra.packages>
+           <bundle.symbolicName>eu.aniketos.wp3.components.spdm.jpa.persistence-model</bundle.symbolicName>
+    <bundle.namespace>eu.aniketos.wp3.components.spdm.jpa.model</bundle.namespace>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.3.4</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Export-Package>eu.aniketos.wp3.components.spdm.jpa.model</Export-Package>
+                        <Import-Package>
+                            javax.persistence;version="1.1.0";jpa="2.0",org.apache.derby.jdbc,${extra.packages}
+                        </Import-Package>
+                        <JPA-PersistenceUnits>jpa.students</JPA-PersistenceUnits>
+                        <Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
+                        <Bundle-RequiredExecutionEnvironment>JavaSE-1.6</Bundle-RequiredExecutionEnvironment>
+                    </instructions>
+                </configuration>
+            </plugin>
+
+ <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>compile</phase>
+                                <configuration>
+                                    <tasks>
+                                        <path id="enhance.path.ref">
+                                            <fileset dir="${project.build.outputDirectory}">
+                                                <include name="*.class"/>
+                                            </fileset>
+                                        </path>
+                                        <pathconvert property="enhance.files" refid="enhance.path.ref" pathsep=" "/>
+                                        <java classname="org.apache.openjpa.enhance.PCEnhancer">
+                                            <arg line="-p persistence.xml"/>
+                                            <arg line="${enhance.files}"/>
+                                            <classpath>
+                                                <path refid="maven.dependency.classpath"/>
+                                                <path refid="maven.compile.classpath"/>
+                                            </classpath>
+                                        </java>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+<plugin>
+<groupId>org.apache.felix</groupId>
+<artifactId>maven-scr-plugin</artifactId>
+<version>1.7.4</version>
+<executions>
+<execution>
+<id>generate-scr-descriptions</id>
+<goals>
+<goal>scr</goal>
+</goals>
+</execution>
+</executions>
+</plugin>
+        </plugins>
+    </build>
+
+<repositories>
+<repository>
+    <id>com.springsource.repository.bundles.release</id>
+    <name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
+    <url>http://repository.springsource.com/maven/bundles/release</url>
+</repository>
+<repository>
+    <id>com.springsource.repository.bundles.external</id>
+    <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
+    <url>http://repository.springsource.com/maven/bundles/external</url>
+</repository>
+</repositories>
+</project>

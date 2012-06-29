@@ -37,6 +37,14 @@ import eu.aniketos.data.IAgreementTemplate;
 import org.osgi.service.component.ComponentContext;
 //import org.osgi.service.log.LogService;
 
+/**
+ * AgreementTemplate is the implementation of @IAgreementTemplate interface.
+ * An AgreementTemplate is a collection of security properties. This class
+ * provider the necessary methods to manipulate @SecurityProperty
+ * 
+ * @author Bernard Butler
+ *
+ */
 @Component(name="agreemet-template-component")@Service
 public class AgreementTemplate implements Serializable, IAgreementTemplate {
 	
@@ -88,22 +96,27 @@ public class AgreementTemplate implements Serializable, IAgreementTemplate {
     private Map<String, ISecurityProperty> securityPropertyMap;
 	//There will be a certificate object here in the future.
 	
-    
+    /**
+     * Register @AgreementTempalte service with OSGi container
+     * @param context Handle to declarative service
+     */
 	@Activate
 	protected void activateAgreementTemplate(ComponentContext context) {
 		// log.debug("Activate ReferenceManager");
 		System.out.println("Activate Agreement Template Component");
 //		log.log(LogService.LOG_INFO, "Activate Agreement Template Component!");
 
-		// @TODO
 	}
-
+	
+	/**
+	 * UnRegister @AgreementTemplater Service with OSCi container 
+	 * @param context
+	 */
 	@Deactivate
 	protected void deactivateAgreementTemplate(ComponentContext context) {
 		// log.debug("Deactivate ReferenceManager");
 		System.out.println("Deactivate AgreementTemplate Component");
 //	    log.log(LogService.LOG_INFO, "Deactivate Agreement Template Component!");
-	    //@TODO
 	}
 	 
     //Binding signatures for this service for client applications
@@ -127,12 +140,20 @@ public class AgreementTemplate implements Serializable, IAgreementTemplate {
 //	    this.log = null;
 //	}
     
+	/**
+	 * Constructor for instantiating @AgreementTempalte 
+	 * @param agreementTemplateID
+	 * @param serviceProviderID
+	 */
 	public AgreementTemplate(String agreementTemplateID, String serviceProviderID){		
 		this.agreementTemplateID = agreementTemplateID;
 		this.serviceProviderID = serviceProviderID;
 		init();
 	}
 
+	/**
+	 * No argument constructor for instantiating @AgreementTemplate
+	 */
 	public AgreementTemplate(){
 		init();
 	}
@@ -142,18 +163,34 @@ public class AgreementTemplate implements Serializable, IAgreementTemplate {
 		securityProperties = new HashSet<ISecurityProperty>();
 	}
 	
+	/**
+	 * Method to obtain @AgreementTemplate ID.
+	 * @return String value
+	 */
 	public String getAgreementTemplateID() {
 		return agreementTemplateID;
 	}
 	
+	/**
+	 * Method to update @AgreementTemplate ID.
+	 * @param agreementTemplateID
+	 */
 	public void setAgreementTemplateID(String agreementTemplateID) {
 		this.agreementTemplateID = agreementTemplateID;
 	}
 
+	/**
+	 * Method to obtain @SecurityProperty
+	 * @return @ISecurityProperty
+	 */
 	public Set<ISecurityProperty> getSecurityProperties() {
 		return securityProperties;
 	}
 
+	/**
+	 * Method to update @SecurityProperty
+	 * @param securityProperties
+	 */
 	public void setSecurityProperties(Set<ISecurityProperty> securityProperties) {
 		this.securityProperties = securityProperties;
 	}
@@ -201,6 +238,9 @@ public class AgreementTemplate implements Serializable, IAgreementTemplate {
 		}
 	}
 	
+	/**
+	 * Comparision object for comparing @AgreementTemplate instances
+	 */
 	@Override
 	public boolean equals(Object o) {
 

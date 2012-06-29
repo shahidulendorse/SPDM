@@ -19,6 +19,11 @@ import eu.aniketos.data.IAgreementTemplate;
 import eu.aniketos.data.ISecurityProperty;
 import eu.aniketos.data.IServiceCentre;
 
+/**
+ * 
+ * @author Bernard Butler
+ *
+ */
 @Component
 public class DSClient {
 
@@ -63,6 +68,10 @@ public class DSClient {
 	 unbind = "unbindServiceCentre")
 	 private IServiceCentre service_centre;
 			 
+	/**
+     * Register @DSClient as a service with OSGi container
+	 * @param cc
+	 */
 	@Activate
 	public void activate(ComponentContext cc) {
 		
@@ -78,45 +87,78 @@ public class DSClient {
 
 	}
 
+	/**
+	 * Announcing @HelloWorld as an OSGi Service
+	 * @param service
+	 */
+	 
 	//Binding & Unbinding HelloWorld
 	 public void bindHelloWorld(HelloWorldService service) {
 		 this.hello_service = service;
 		 System.out.println("Binding --- HelloWorld Service");
 	 }
 	
+	 /**
+	  * Unbding @HelloWorldService service
+	  * @param service
+	  */
 	 public void unbindHelloWorld(HelloWorldService service) {
 		 this.hello_service = null;
 		 System.out.println("Unbinding --- HelloWorld Service");
 	 }	
 	 
+	 /**
+	  * Announcing @AgreementTemplate as an OSGi Service
+	  * @param agreement_template service
+	  */
 	//Binding & Unbinding AgreementTemplate
 	 public void bindAgreementTemplate(IAgreementTemplate agreement_template) {
 		 this.agreement_template = agreement_template;
 		 System.out.println("Binding Service --- AgreementTemplate");
 	 }
 	
+	 /**
+	  * Unbinding @Agreementtemplate service
+	  * @param agreement_template
+	  */
 	 public void unbindAgreementTemplate(IAgreementTemplate agreement_template) {
 		 this.agreement_template = null;
 		 System.out.println("Unbinding Service --- AgreementTemplate");
 	 }  	 
 	 
+	 /**
+	  * Announcing @SecurityProperty as an OSGi Service 
+	  * @param security_property service
+	  */
 	 //Binding & Unbinding SecurityProperty 
 	 public void bindSecurityProperty(ISecurityProperty security_property) {
 		 this.security_property = security_property;
 		 System.out.println("Binding Service --- SecurityProperty");
 	 }
 	
+	 /**
+	  * Unbinding @SecurityProerty service
+	  * @param security_property
+	  */
 	 public void unbindSecurityProperty(ISecurityProperty security_property) {
 		 this.security_property = null;
 		 System.out.println("Unbinding Service --- SecurityProperty");
 	 }  
 	 
+	 /**
+	  * Announcing @ServiceCentre as an OSGi Service
+	  * @param service_centre
+	  */
 	 //Binding & Unbinding ServiceCentre
 	 public void bindServiceCentre(IServiceCentre service_centre) {
 		 this.service_centre = service_centre;
 		 System.out.println("Binding Service --- ServiceCentre");
 	 }
 	
+	 /**
+	  * Unbinding @ServiceCentre
+	  * @param service_centre
+	  */
 	 public void unbindServiceCentre(IServiceCentre service_centre) {
 		 this.service_centre = null;
 		 System.out.println("Unbinding Service --- ServiceCentre");

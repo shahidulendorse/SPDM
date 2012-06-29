@@ -2,6 +2,11 @@ package eu.aniketos.data;
 
 import java.security.cert.X509Certificate;
 
+/**
+ * IServiceProvider is an interface to helps to certify a security property
+ * @author Bernard Butler
+ *
+ */
 public interface IServiceProvider {
 
 	public abstract String getID();

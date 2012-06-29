@@ -1,7 +1,7 @@
 package eu.aniketos.data;
 
 /**
- * IConsumerPolicy - an interface specifying a Consumer's Policy - a set of security
+ * IConsumerPolicy is an interface specifying a Consumer's Policy that is a set of security
  * properties required/requested from services
  * 
  * @author David Lamb, LJMU

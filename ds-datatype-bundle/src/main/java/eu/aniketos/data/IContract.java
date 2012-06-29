@@ -1,8 +1,8 @@
 package eu.aniketos.data;
 
 /**
- * IContract - an interface that represents an Agreed IContract:
- * -that is, a contract comprising one or more security properties that have been agreed.
+ * IContract is an interface that represents an Agreed IContract that
+ * a contract comprising one or more security properties that have been agreed.
  * 
  * @author David Lamb, LJMU
  * @revised by Bo Zhou LJMU Aug 2011 

@@ -5,8 +5,8 @@ import java.util.List;
 import eu.aniketos.data.ISecurityProperty;
 
 /**
- *
- * @author: bbutler
+ * @SecurityPropertyDAO is an interface to @SecurityProperty persistence object.
+ * @author: Bernard Butler
  */
 public interface SecurityPropertyDao {
 	public abstract void updateSecurityProperty(ISecurityProperty securityProperty);

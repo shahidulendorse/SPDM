@@ -3,7 +3,7 @@ package eu.aniketos.wp3.spdm.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
 
 import eu.aniketos.wp3.spdm.dao.AgreementTemplateDao;
@@ -12,142 +12,190 @@ import eu.aniketos.data.IAgreementTemplate;
 /**
  * Data Access Object for source members
  * 
- * @author: bbutler
+ * @author: Bernard Butler
  */
-public class AgreementTemplateDaoImpl  extends JpaDaoSupport implements AgreementTemplateDao {
+public class AgreementTemplateDaoImpl extends JpaDaoSupport implements
+		AgreementTemplateDao {
 
-	private static Logger logger = Logger.getLogger(AgreementTemplateDaoImpl.class);
-	
-	
+	// private static Logger logger =
+	// Logger.getLogger(AgreementTemplateDaoImpl.class);
+
 	public AgreementTemplateDaoImpl() {
 		super();
 	}
 
+	/**
+	 * Method for adding an new @AgreementTemplate
+	 * @param IAgreementTemplate 
+	 */
 	public void addAgreementTemplate(IAgreementTemplate agreementTemplate) {
 
 		try {
 			getJpaTemplate().persist(agreementTemplate);
 			getJpaTemplate().flush();
 
-			//agreementTemplates.put(agreementTemplate.getName(), agreementTemplate);
-			logger.debug("addAgreementTemplate: agreementTemplate saved");
+			// agreementTemplates.put(agreementTemplate.getName(),
+			// agreementTemplate);
+			// logger.debug("addAgreementTemplate: agreementTemplate saved");
 		} catch (Exception e) {
-			logger.error("addAgreementTemplate: agreementTemplate: " + e.getMessage());
+			e.printStackTrace();
+			// logger.error("addAgreementTemplate: agreementTemplate: " +
+			// e.getMessage());
 		}
 	}
-	
+
+	/**
+	 * Method for updating an existing @AgreementTemplate 
+	 * @param IAgreementTemplate
+	 */
 	public void updateAgreementTemplate(IAgreementTemplate agreementTemplate) {
 
 		try {
 			getJpaTemplate().merge(agreementTemplate);
 			getJpaTemplate().flush();
 
-			//services.put(service.getName(), service);
-			logger.debug("updateAgreementTemplate: agreementTemplate saved");
+			// services.put(service.getName(), service);
+			// logger.debug("updateAgreementTemplate: agreementTemplate saved");
 		} catch (Exception e) {
-			logger.error("updateAgreementTemplate: " + e.getMessage());
+			e.printStackTrace();
+			// logger.error("updateAgreementTemplate: " + e.getMessage());
 		}
 	}
 
+	/**
+	 * List all @AgreementTemplate(s)
+	 * @return 
+	 */
 	@SuppressWarnings("unchecked")
 	public List<IAgreementTemplate> getAllAgreementTemplates() {
 		List<IAgreementTemplate> agreementTemplates = new ArrayList<IAgreementTemplate>();
 		List<Object> results = null;
-		
+
 		try {
-			results = (ArrayList<Object>) getJpaTemplate().find("from AgreementTemplate");
+			results = (ArrayList<Object>) getJpaTemplate().find(
+					"from AgreementTemplate");
 			getJpaTemplate().flush();
 
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			e.printStackTrace();
+
+			// logger.error(e.getMessage());
 		}
-		
+
 		if (results != null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug("results  " + results.size());
-			}
+			// if (logger.isDebugEnabled()) {
+			// logger.debug("results  " + results.size());
+			// }
 
 			for (Object result : results) {
 				agreementTemplates.add((IAgreementTemplate) result);
 			}
-		} else {
-			logger.debug("getAllAgreementTemplates: query returned null");
 		}
-		if (logger.isDebugEnabled()) {
-			logger.debug("getAllAgreementTemplates: loaded agreementTemplates " + agreementTemplates.size());
-		}
+		// else {
+		// logger.debug("getAllAgreementTemplates: query returned null");
+		// }
+		// if (logger.isDebugEnabled()) {
+		// logger.debug("getAllAgreementTemplates: loaded agreementTemplates " +
+		// agreementTemplates.size());
+		// }
 		return agreementTemplates;
 	}
 
+	/**
+	 * Get an @AgreementTamplet given an ID.
+	 * @param String
+	 */
 	public IAgreementTemplate getAgreementTemplate(final String id) {
 		IAgreementTemplate agreementTemplate = null;
 		try {
-			
-			//agreementTemplate = (AgreementTemplate) getJpaTemplate().find("Select a from AgreementTemplate a where a.id='"+id+"'");
-			agreementTemplate = (IAgreementTemplate) getJpaTemplate().getReference(IAgreementTemplate.class, id);
+
+			// agreementTemplate = (AgreementTemplate)
+			// getJpaTemplate().find("Select a from AgreementTemplate a where a.id='"+id+"'");
+			agreementTemplate = (IAgreementTemplate) getJpaTemplate()
+					.getReference(IAgreementTemplate.class, id);
 			getJpaTemplate().flush();
 
 		} catch (Exception e) {
-			logger.error("getAgreementTemplate: " + e.getMessage());
+			e.printStackTrace();
+
+			// logger.error("getAgreementTemplate: " + e.getMessage());
 		}
-		if (agreementTemplate != null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug("getAgreementTemplate: found agreementTemplate: " + agreementTemplate.getAgreementTemplateID());
-			}
-		} else {
-			logger.debug("getAgreementTemplate: no agreementTemplate found");
-		}
+		// if (agreementTemplate != null) {
+		// if (logger.isDebugEnabled()) {
+		// logger.debug("getAgreementTemplate: found agreementTemplate: " +
+		// agreementTemplate.getAgreementTemplateID());
+		// }
+		// } else {
+		// logger.debug("getAgreementTemplate: no agreementTemplate found");
+		// }
 		return agreementTemplate;
 	}
 
+	/**
+	 * Method which can remove an exisitng @AgreementTemplate
+	 * @param IAgreementTempalte
+	 */
 	public void deleteAgreementTemplate(IAgreementTemplate agreementTemplate) {
-		String agreementTemplateName = agreementTemplate.getAgreementTemplateID();
-		
+		String agreementTemplateName = agreementTemplate
+				.getAgreementTemplateID();
+
 		try {
 
 			agreementTemplate = getJpaTemplate().merge(agreementTemplate);
 			getJpaTemplate().remove(agreementTemplate);
 			getJpaTemplate().flush();
 
-			if (logger.isDebugEnabled()) {
-				logger.debug("deleteAgreementTemplate: deleted record for agreementTemplate " + agreementTemplateName);
-			}
+			// if (logger.isDebugEnabled()) {
+			// logger.debug("deleteAgreementTemplate: deleted record for agreementTemplate "
+			// + agreementTemplateName);
+			// }
 		} catch (Exception e) {
-			logger.error("deleteAgreementTemplate: " + e.getMessage());
+			e.printStackTrace();
+
+			// logger.error("deleteAgreementTemplate: " + e.getMessage());
 		}
 
 	}
 
-
+	/**
+	 * Method which returns all @AgreementTemplate Names.
+	 * @return 
+	 */
 	@SuppressWarnings("unchecked")
 	public List<String> getAllAgreementTemplateNames() {
-		
+
 		List<String> agreementTemplateNames = new ArrayList<String>();
 		List<Object> results = null;
-		
+
 		try {
-			results = (ArrayList<Object>) getJpaTemplate().find("select name from AgreementTemplate");
+			results = (ArrayList<Object>) getJpaTemplate().find(
+					"select name from AgreementTemplate");
 			getJpaTemplate().flush();
 
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			e.printStackTrace();
+			//
+			// logger.error(e.getMessage());
 		}
-		
+
 		if (results != null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug("getAllAgreementTemplateNames: results  " + results.size());
-			}
+			// if (logger.isDebugEnabled()) {
+			// logger.debug("getAllAgreementTemplateNames: results  " +
+			// results.size());
+			// }
 
 			for (Object result : results) {
 				String agreementTemplateName = (String) result;
 				agreementTemplateNames.add(agreementTemplateName);
 			}
-		} else {
-			logger.debug("getAllAgreementTemplateNames: query returned null");
 		}
-		if (logger.isDebugEnabled()) {
-			logger.debug("getAllAgreementTemplateNames: loaded services " + agreementTemplateNames.size());
-		}
+		// else {
+		// logger.debug("getAllAgreementTemplateNames: query returned null");
+		// }
+		// if (logger.isDebugEnabled()) {
+		// logger.debug("getAllAgreementTemplateNames: loaded services " +
+		// agreementTemplateNames.size());
+		// }
 		return agreementTemplateNames;
 	}
 }

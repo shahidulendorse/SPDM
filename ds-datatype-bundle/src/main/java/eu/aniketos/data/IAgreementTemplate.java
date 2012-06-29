@@ -5,7 +5,7 @@ import java.util.Set;
 
 /**
  * 
- * IAgreementTemplate - an interface specifying a Agreement Template - that is a
+ * IAgreementTemplate interface specifying an Agreement Template Service that is a
  * proposed contract (set of properties) offered by a service.
  * 
  * @author David Lamb, LJMU
@@ -14,7 +14,7 @@ import java.util.Set;
  * @revised by Bernard Butler, TSSG Dec 2011
  */
 public interface IAgreementTemplate extends IPropertyBundle
-{
+{	
 	public abstract String getAgreementTemplateID();
 
 	public abstract void setAgreementTemplateID(String agreementTemplateID);

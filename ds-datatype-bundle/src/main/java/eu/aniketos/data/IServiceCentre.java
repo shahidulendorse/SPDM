@@ -2,6 +2,12 @@ package eu.aniketos.data;
 
 import java.util.Map;
 
+/**
+ * IServiceCentre is an interface to the SPDM local persistence storage.
+ * 
+ * @author Bernard Butler
+ *
+ */
 public interface IServiceCentre {
 
 	public abstract Map<String, IAgreementTemplate> getAgreementTemplates();

@@ -4,7 +4,7 @@ package eu.aniketos.wp3.spdm.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
 
 import eu.aniketos.wp3.spdm.dao.SecurityPropertyDao;
@@ -13,43 +13,55 @@ import eu.aniketos.data.ISecurityProperty;
 /**
  * Data Access Object for SecurityProperty
  * 
- * @author: bbutler
+ * @author: Bernard Butler
  */
 public class SecurityPropertyDaoImpl extends JpaDaoSupport implements SecurityPropertyDao {
 
-	private static Logger logger = Logger.getLogger(SecurityPropertyDaoImpl.class);
+//	private static Logger logger = Logger.getLogger(SecurityPropertyDaoImpl.class);
 
 	public SecurityPropertyDaoImpl() {
 		super();
 	}
 	
+	/**
+	 * Add a @SecurityProperty Method
+	 * @param SecurityProperty
+	 */
 	public void addSecurityProperty(ISecurityProperty SecurityProperty) {
 
 		try {
 			getJpaTemplate().persist(SecurityProperty);
 			getJpaTemplate().flush();
 
-			if (logger.isDebugEnabled()) {
-				logger.debug("SecurityProperty saved");
-			}
+//			if (logger.isDebugEnabled()) {
+//				logger.debug("SecurityProperty saved");
+//			}
 		} 
 		catch (Exception e) {
-			logger.error("addSecurityProperty: " + e.getMessage());
+			e.printStackTrace();
+
+//			logger.error("addSecurityProperty: " + e.getMessage());
 		}
 	}
 
+	/**
+	 * Update an existing @SecurityProperty
+	 * @param ISecurityProperty
+	 */
 	public void updateSecurityProperty(ISecurityProperty SecurityProperty) {
 
 		try {
 			getJpaTemplate().merge(SecurityProperty);
 			getJpaTemplate().flush();
 
-			if (logger.isDebugEnabled()) {
-				logger.debug("SecurityProperty saved");
-			}
+//			if (logger.isDebugEnabled()) {
+//				logger.debug("SecurityProperty saved");
+//			}
 		} 
 		catch (Exception e) {
-			logger.error("updateSecurityProperty: " + e.getMessage());
+			e.printStackTrace();
+
+//			logger.error("updateSecurityProperty: " + e.getMessage());
 		}
 	}
 
@@ -65,13 +77,15 @@ public class SecurityPropertyDaoImpl extends JpaDaoSupport implements SecurityPr
 			getJpaTemplate().flush();
 			//em.createQuery("s from SecurityProperty s, Agent a where s.agent = a and a.name='"+agentName+"'")
 		} catch (Exception e) {
-			logger.error("getSecurityPropertiesByPropertyId: " + e.getMessage());
+			e.printStackTrace();
+
+//			logger.error("getSecurityPropertiesByPropertyId: " + e.getMessage());
 		}
 		
 		if (results != null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug("results  " + results.size());
-			}
+//			if (logger.isDebugEnabled()) {
+//				logger.debug("results  " + results.size());
+//			}
 
 			for (Object result : results) {
 
@@ -79,19 +93,19 @@ public class SecurityPropertyDaoImpl extends JpaDaoSupport implements SecurityPr
 				securityProperties.add(SecurityProperty);
 			}
 		} 
-		else {
-			logger.warn("query returned null");
-		}
+//		else {
+//			logger.warn("query returned null");
+//		}
+//		
+//		if (logger.isDebugEnabled()) {
+//			logger.debug("getSecurityPropertiesByPropertyId " + securityProperties.size());
+//		}
 		
-		if (logger.isDebugEnabled()) {
-			logger.debug("getSecurityPropertiesByPropertyId " + securityProperties.size());
-		}
-		
-		if (securityProperties != null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug("found SecurityPropertys");
-			}
-		} 
+//		if (securityProperties != null) {
+//			if (logger.isDebugEnabled()) {
+//				logger.debug("found SecurityPropertys");
+//			}
+//		} 
 				
 		return securityProperties;
 	}
@@ -100,7 +114,7 @@ public class SecurityPropertyDaoImpl extends JpaDaoSupport implements SecurityPr
 
 		String serviceId = securityProperty.getPropertyID();
 
-		logger.info("deleting SecurityProperty from " + serviceId);
+//		logger.info("deleting SecurityProperty from " + serviceId);
 		
 		try {
 			
@@ -108,12 +122,14 @@ public class SecurityPropertyDaoImpl extends JpaDaoSupport implements SecurityPr
 			getJpaTemplate().remove(securityProperty);
 			getJpaTemplate().flush();
 
-			if (logger.isDebugEnabled()) {
-				logger.debug("deleted record for SecurityProperty " + securityProperty.getPropertyID());
-			}
+//			if (logger.isDebugEnabled()) {
+//				logger.debug("deleted record for SecurityProperty " + securityProperty.getPropertyID());
+//			}
 
 		} catch (Exception e) {
-			logger.error("deleteSecurityProperty: " + e.getMessage());
+			e.printStackTrace();
+//
+//			logger.error("deleteSecurityProperty: " + e.getMessage());
 		}
 
 	}

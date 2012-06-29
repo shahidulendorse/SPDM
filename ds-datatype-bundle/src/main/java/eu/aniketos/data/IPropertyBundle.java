@@ -3,7 +3,7 @@ package eu.aniketos.data;
 import java.util.Map;
 
 /**
- * IPropertyBundle - a bundle of generic properties regardless
+ * IPropertyBundle is an interface for generic properties regardless
  * of intention or negotiation status.
  * AgreementTemplates, Contracts and ConsumerPolicies are all types of IPropertyBundle
  * 

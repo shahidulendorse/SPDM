@@ -3,6 +3,13 @@ package eu.aniketos.data;
 import java.util.Date;
 import java.util.Set;
 
+/**
+ * ISecurityProerpty is an interface that specify the behavior of the
+ * Security Properties.
+ * 
+ * @author Bernard Butler
+ *
+ */
 public interface ISecurityProperty {
 	
 	public abstract String getPropertyID();

@@ -21,7 +21,11 @@ import org.osgi.service.component.ComponentContext;
 
 //import org.osgi.service.log.LogService;
 
-
+/**
+ * A local class for manuplating @AgreementTemplate & @SecurityProperty.
+ * 
+ * @author  Bernard Butler
+ */
 
 @Component(name="service-centre-component")@Service
 public class ServiceCentre implements IServiceCentre {
@@ -60,7 +64,10 @@ public class ServiceCentre implements IServiceCentre {
 	private Map<String, IAgreementTemplate> agreementTemplates;
 	//There will be a certificate object here in the future.
 	
-	
+	/**
+     * Register @ServiceCentre service with OSGi container
+	 * @param context
+	 */
 	@Activate
 	protected void activateServiceCentre(ComponentContext context) {
 		// log.debug("Activate ReferenceManager");
@@ -70,6 +77,10 @@ public class ServiceCentre implements IServiceCentre {
 		// @TODO
 	}
 
+	/**
+	 * UnRegister @ServiceCentre Service with OSCi container 
+	 * @param context
+	 */
 	@Deactivate
 	protected void deactivateServiceCentre(ComponentContext context) {
 		// log.debug("Deactivate ReferenceManager");
@@ -100,39 +111,71 @@ public class ServiceCentre implements IServiceCentre {
 //	    this.log = null;
 //	}
 	
-	
+	/**
+	 * 
+	 */
 	public ServiceCentre(){		
 		agreementTemplates = new TreeMap<String, IAgreementTemplate>();	
 	}
-
+	
+	/**
+	 * Get stored @AgreementTemplates.
+	 * @return
+	 */
 	public Map<String, IAgreementTemplate> getAgreementTemplates() {
 		return agreementTemplates;
 	}
 
+	/**
+	 * 
+	 * @param agreementTemplateID
+	 * @return
+	 */
 	public IAgreementTemplate getService(String agreementTemplateID) {
 		return agreementTemplates.get(agreementTemplateID);
 	}
 	
+	/**
+	 * Add a new @AgreementTemplate to service store
+	 * @param agreementTemplate
+	 */
 	public void addService(IAgreementTemplate agreementTemplate) {
 		agreementTemplates.put(agreementTemplate.getAgreementTemplateID(), agreementTemplate);
 	}
 
+	/**
+	 * Move an existing @AgreementTemplate from service store.
+	 * @param agreementTemplateID
+	 */
 	public void removeAgreementTemplate(String agreementTemplateID) {
 		agreementTemplates.remove(agreementTemplateID);
 	}
 	
-
+	
+	/**
+	 * Add a ServiceProvider
+	 * @param serviceProviderID
+	 * @return
+	 */
 	public Map<String, IAgreementTemplate> getProviderAgreementTemplates(
 			String serviceProviderID) {
 		// TODO Auto-generated method stub: Filtered by serviceProviderID
 		return null;
 	}
 
+	/**
+	 * Obtain a composition Plan
+	 * @return
+	 */
 	public Map<String, ICompositionPlan> getCompositionPlans() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Return a composition plan
+	 * @return
+	 */
 	public Map<String, IServiceProvider> getServiceProviders() {
 		// TODO Auto-generated method stub
 		Map<String, IServiceProvider> serviceProviderMap = new TreeMap<String, IServiceProvider>();
@@ -142,7 +185,9 @@ public class ServiceCentre implements IServiceCentre {
 		return null;
 	}
 
-
+	/**
+	 * 
+	 */
 	public String toString(){
 		String temp = "Service Centre: \n";
 		for(String agreementTemplateID:agreementTemplates.keySet()){

@@ -34,7 +34,11 @@ import org.apache.felix.scr.annotations.Service;
 import org.osgi.service.component.ComponentContext;
 
 //import org.osgi.service.log.LogService;
-
+/**
+ * 
+ * @author Bernard Butler
+ *
+ */
 @Component(name="security-property-component")@Service
 public class SecurityProperty implements Serializable, ISecurityProperty{
 	
@@ -89,7 +93,10 @@ public class SecurityProperty implements Serializable, ISecurityProperty{
 	@ManyToMany(mappedBy="securityProperties")
 	private Set<IAgreementTemplate> agreementTemplates = new HashSet<IAgreementTemplate>();
 
-	
+	/**
+     * Register @SecurityProperty service with OSGi container
+	 * @param context
+	 */
 	@Activate
 	protected void activateSecurityProperty(ComponentContext context) {
 		// log.debug("Activate ReferenceManager");
@@ -99,6 +106,10 @@ public class SecurityProperty implements Serializable, ISecurityProperty{
 		// @TODO
 	}
 
+	/**
+	 * UnRegister @SecurityProperty Service with OSCi container 
+	 * @param context
+	 */
 	@Deactivate
 	protected void deactivateSecurityProperty(ComponentContext context) {
 		// log.debug("Deactivate ReferenceManager");
@@ -129,20 +140,39 @@ public class SecurityProperty implements Serializable, ISecurityProperty{
 //	    this.log = null;
 //	}
 	
+	/**
+	 * Constructor for @SecurityProperty
+	 */
 	public SecurityProperty(){
 	}
 
+	/**
+	 * Overloaded Constructor for @SecurityProperty
+	 * @param propertyID
+	 * @param value
+	 * @param freshness
+	 */
 	public SecurityProperty(String propertyID, String value, Date freshness){
 		this.propertyID = propertyID;
 		this.value = value;
 		this.freshness = freshness;
 	}
 	
+	/**
+	 * Overloaded Constructor for @SecurityProperty
+	 * @param propertyID
+	 * @param value
+	 */
 	public SecurityProperty(String propertyID, String value){
 		this.propertyID = propertyID;
 		this.value = value;
 		this.freshness = null;
 	}
+	
+	/**
+	 * Security Property ID
+	 * @param propertyID
+	 */
 	
 	public SecurityProperty(String propertyID){
 		this.propertyID = propertyID;
@@ -150,38 +180,73 @@ public class SecurityProperty implements Serializable, ISecurityProperty{
 		this.freshness = null;
 	}
 	
+	/**
+	 *
+	 * @return
+	 */
 	public String getPropertyID(){
 		return propertyID;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getValue(){
 		return value;
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public Date getFreshness(){
 		return freshness;
 	}
 
+	/**
+	 * 
+	 * @param propertyID
+	 */
 	public void setPropertyID(String propertyID) {
 		this.propertyID = propertyID;
 	}
 
+	/**
+	 * 
+	 * @param value
+	 */
 	public void setValue(String value) {
 		this.value = value;
 	}
 
+	/**
+	 * Signed date of @SecurityProperty
+	 * @param freshness
+	 */
 	public void setFreshness(Date freshness) {
 		this.freshness = freshness;
 	}
 
+	/**
+	 * @AgreementTempalte containing @SecurityProperty
+	 * @return
+	 */
 	public Set<IAgreementTemplate> getAgreementTemplates() {
 		return agreementTemplates;
 	}
 
+	/**
+	 * 
+	 * @param agreementTemplates
+	 */
 	public void setAgreementTemplates(Set<IAgreementTemplate> agreementTemplates) {
 		this.agreementTemplates = agreementTemplates;
 	}
 
+	/**
+	 * Comparing instances of @SecurityProperty. 
+	 */
 	@Override
 	public boolean equals(Object o) {
 
@@ -201,13 +266,19 @@ public class SecurityProperty implements Serializable, ISecurityProperty{
 		return new EqualsBuilder().append(propertyID, castOther.getPropertyID()).append(value,
 				castOther.getValue()).append(freshness, castOther.getFreshness()).isEquals();
 	}
-
+	
+	/**
+	 * 
+	 */
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder(441293447, 2056268651).append(propertyID).append(
 				value).append(freshness).toHashCode();
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this).append("propertyID: ", propertyID)
