@@ -56,9 +56,10 @@
     <module>ds-datatype-bundle</module>
     <module>ds-dao-bundle</module>
     <module>driver-bundle</module>
-    <module>persistence-model</module>
+ <module>persistence-model</module>
     <module>client-console</module>
-<!--    <module>ui-bundle</module> 
+<!--
+    <module>ui-bundle</module> 
     <module>client-console-bundle</module>
     <module>felix-console-client-bundle</module>
    <module>kaffar-console-client-bundle</module> -->
@@ -72,7 +73,7 @@
       <plugin>
         <groupId>org.ops4j</groupId>
         <artifactId>maven-pax-plugin</artifactId>
-        <version>1.5</version>
+        <version>1.4</version>
                         <configuration>
                             <framework>equinox</framework>
                             <provision>
