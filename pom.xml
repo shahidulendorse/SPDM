@@ -75,7 +75,7 @@
         <artifactId>maven-pax-plugin</artifactId>
         <version>1.4</version>
                         <configuration>
-                            <framework>equinox</framework>
+                            <framework>felix</framework>
                             <provision>
                                 <param>--log=error</param>
                                 <param>--workingDirectory=target/runner</param>
