@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features>
+  <feature name='osgi_R4_core'>
+  </feature>
+  <feature name='osgi_R4_compendium'>
+  </feature>
+  <feature name='org.osgi.compendium'>
+    <bundle>mvn:org.apache.felix/org.osgi.core/1.4.0</bundle>
+    <bundle>mvn:org.apache.felix/javax.servlet/1.0.0</bundle>
+    <bundle>mvn:org.apache.felix/org.osgi.compendium/1.4.0</bundle>
+  </feature>
+</features>

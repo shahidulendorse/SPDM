@@ -1,9 +1,17 @@
+/*
+Copyright (c) 2012, Bernard Butler and Arif Fareed (Waterford Institute of Technology, Ireland), Project: FP7-ICT-257930 Aniketos
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+ -  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ -  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ -  Neither the name of WATERFORD INSTITUTE OF TECHNOLOGY nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
 package eu.aniketos.wp3.components.spdm.ds.test;
-/**
- * Declarative Service Client
- * @author
- * 
- */
+
 import org.apache.felix.scr.annotations.Activate;
 import org.osgi.service.component.ComponentContext;
 
@@ -14,39 +22,33 @@ import org.apache.felix.scr.annotations.ReferencePolicy;
 import org.apache.felix.scr.annotations.ReferenceCardinality;
 import org.apache.felix.scr.annotations.ReferenceStrategy;
 
-import eu.aniketos.wp3.components.spdm.ds.api.HelloWorldService;
-import eu.aniketos.data.IAgreementTemplate;
+import eu.aniketos.wp3.components.spdm.ds.api.ISPSRepository;
+
+import eu.aniketos.wp3.components.spdm.ds.api.IWebService;
+
+import eu.aniketos.data.ISecurityDescriptor;
 import eu.aniketos.data.ISecurityProperty;
-import eu.aniketos.data.IServiceCentre;
 
 /**
  * 
- * @author Bernard Butler
+ * Declarative Service Client
+ * @author Bernard Butler and M. Arif Fareed (TSSG)
  *
  */
 @Component
 public class DSClient {
 
-	// Hello World CLIENT SAMPLE Ref. Template
-	@Reference(name = "hello_service",
-	 cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE,
-	 referenceInterface = HelloWorldService.class,
-	 strategy = ReferenceStrategy.EVENT,
-	 policy = ReferencePolicy.DYNAMIC,
-	 bind = "bindHelloWorld",
-	 unbind = "unbindHelloWorld")
-	 private HelloWorldService hello_service;
-	 
+
 	
-	 //AgreementTemplate CLIENT Ref. CODE Template
-	 @Reference(name = "agreement_template",
+	 //SecurityDescriptor CLIENT Ref. CODE Template
+	 @Reference(name = "security_desciptor",
 	 cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE,
-	 referenceInterface = IAgreementTemplate.class,
+	 referenceInterface = ISecurityDescriptor.class,
 	 strategy = ReferenceStrategy.EVENT,
 	 policy = ReferencePolicy.DYNAMIC,
-	 bind = "bindAgreementTemplate",
-	 unbind = "unbindAgreementTemplate")
-	 private IAgreementTemplate agreement_template;
+	 bind = "bindSecurityDescriptor",
+	 unbind = "unbindSecurityDescriptor")
+	 private ISecurityDescriptor security_descriptor;
 	 
 	 //SecurityProperty CLIENT Ref. CODE Template
 	 @Reference(name = "security_property",
@@ -59,75 +61,66 @@ public class DSClient {
 	 private ISecurityProperty security_property;
 
 	 //ServiceCentre CLIENT Ref. CODE Template
-	 @Reference(name = "service_centre",
+	 @Reference(name = "sps_repository",
 	 cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE,
-	 referenceInterface = IServiceCentre.class,
+	 referenceInterface = ISPSRepository.class,
 	 strategy = ReferenceStrategy.EVENT,
 	 policy = ReferencePolicy.DYNAMIC,
-	 bind = "bindServiceCentre",
-	 unbind = "unbindServiceCentre")
-	 private IServiceCentre service_centre;
+	 bind = "bindSPSRepository",
+	 unbind = "unbindSPSRepository")
+	 private ISPSRepository sps_repository;
 			 
+	 
+	 //ServiceCentre CLIENT Ref. CODE Template
+	 @Reference(name = "web_service",
+	 cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE,
+	 referenceInterface = IWebService.class,
+	 strategy = ReferenceStrategy.EVENT,
+	 policy = ReferencePolicy.DYNAMIC,
+	 bind = "bindWebService",
+	 unbind = "unbindWebService")
+	 private IWebService web_service;
+	 
 	/**
-     * Register @DSClient as a service with OSGi container
+     * Register DSClient as a service with OSGi container
 	 * @param cc
 	 */
 	@Activate
 	public void activate(ComponentContext cc) {
 		
-		System.out.println("\n=== Declarative Service Activator ===");
 		System.out.println("Calling Declarative Service: "
-		+ this.hello_service.helloWorld());
-		System.out.println("Calling Declarative Service: "
-		+ this.agreement_template);
+		+ this.security_descriptor);
 		System.out.println("Calling Declarative Service: "
 		+ this.security_property);
-		System.out.println("Calling Declarative Service: "
-		+ this.service_centre);
+
+		this.sps_repository.registerService(this.web_service, this.security_descriptor);
+		System.out.println("Repository Size : === "+ this.sps_repository.repository_size());
+		System.out.println("+++ Printing SPS Repository +++: "+ this.sps_repository.lookUpSecurityProperty(this.web_service));
 
 	}
 
-	/**
-	 * Announcing @HelloWorld as an OSGi Service
-	 * @param service
-	 */
 	 
-	//Binding & Unbinding HelloWorld
-	 public void bindHelloWorld(HelloWorldService service) {
-		 this.hello_service = service;
-		 System.out.println("Binding --- HelloWorld Service");
+	 /**
+	  * Announcing SecurityDescriptor as an OSGi Service
+	  * @param security_descriptor
+	  */
+	//Binding & Unbinding SecurityDescriptor
+	 public void bindSecurityDescriptor(ISecurityDescriptor security_descriptor) {
+		 this.security_descriptor = security_descriptor;
+		 System.out.println("Binding Service --- SecurityDescriptor");
 	 }
 	
 	 /**
-	  * Unbding @HelloWorldService service
-	  * @param service
+	  * Unbinding SecurityDescriptor service
+	  * @param security_descriptor
 	  */
-	 public void unbindHelloWorld(HelloWorldService service) {
-		 this.hello_service = null;
-		 System.out.println("Unbinding --- HelloWorld Service");
-	 }	
-	 
-	 /**
-	  * Announcing @AgreementTemplate as an OSGi Service
-	  * @param agreement_template service
-	  */
-	//Binding & Unbinding AgreementTemplate
-	 public void bindAgreementTemplate(IAgreementTemplate agreement_template) {
-		 this.agreement_template = agreement_template;
-		 System.out.println("Binding Service --- AgreementTemplate");
-	 }
-	
-	 /**
-	  * Unbinding @Agreementtemplate service
-	  * @param agreement_template
-	  */
-	 public void unbindAgreementTemplate(IAgreementTemplate agreement_template) {
-		 this.agreement_template = null;
-		 System.out.println("Unbinding Service --- AgreementTemplate");
+	 public void unbindSecurityDescriptor(ISecurityDescriptor security_descriptor) {
+		 this.security_descriptor = null;
+		 System.out.println("Unbinding Service --- SecurityDescriptor");
 	 }  	 
 	 
 	 /**
-	  * Announcing @SecurityProperty as an OSGi Service 
+	  * Announcing SecurityProperty as an OSGi Service 
 	  * @param security_property service
 	  */
 	 //Binding & Unbinding SecurityProperty 
@@ -137,30 +130,62 @@ public class DSClient {
 	 }
 	
 	 /**
-	  * Unbinding @SecurityProerty service
+	  * Unbinding SecurityProperty service
 	  * @param security_property
 	  */
 	 public void unbindSecurityProperty(ISecurityProperty security_property) {
 		 this.security_property = null;
-		 System.out.println("Unbinding Service --- SecurityProperty");
+		 System.out.println("Unbinding Service --- Security Property");
 	 }  
 	 
 	 /**
-	  * Announcing @ServiceCentre as an OSGi Service
-	  * @param service_centre
+	  * Announcing WebService as an OSGi Service 
+	  * @param web_service service
 	  */
-	 //Binding & Unbinding ServiceCentre
-	 public void bindServiceCentre(IServiceCentre service_centre) {
-		 this.service_centre = service_centre;
-		 System.out.println("Binding Service --- ServiceCentre");
+	 //Binding & Unbinding SecurityProperty 
+	 public void bindWebService(IWebService web_service) {
+		 this.web_service = web_service;
+		 System.out.println("Binding Service --- Web Serive");
 	 }
 	
 	 /**
-	  * Unbinding @ServiceCentre
-	  * @param service_centre
+	  * Unbinding WebService service
+	  * @param web_service
 	  */
-	 public void unbindServiceCentre(IServiceCentre service_centre) {
-		 this.service_centre = null;
-		 System.out.println("Unbinding Service --- ServiceCentre");
+	 public void unbindWebService(IWebService web_service) {
+		 this.web_service = null;
+		 System.out.println("Unbinding Service --- Web Service");
+	 }  
+	 
+	 /**
+	  * Announcing SPSRepository as an OSGi Service
+	  * @param sps_repository
+	  */
+	 //Binding & Unbinding ServiceCentre
+	 public void bindSPSRepository(ISPSRepository sps_repository) {
+		 this.sps_repository = sps_repository;
+		 System.out.println("Binding Service --- SPS Repository");
+		 		 
+		 
+//		 this.web_service.setID( "http://testservice?wsdl");
+		 
+//		 this.sps_repository.put("a", "1");
+//		 this.sps_repository.put("b", "1");
+//		 this.sps_repository.put("c", "1");
+//		 this.sps_repository.put("d", "2");
+//		 this.sps_repository.put("e", "2");
+//		 this.sps_repository.put("f", "3");
+//		 this.sps_repository.put("g", "4");
+		 System.out.println("SPS Repository Size ======:" + this.sps_repository.repository_size());
+		
+	 }
+	
+	 /**
+	  * Unbinding ISPSRepository
+	  * @param sps_repository
+	  */
+	 public void unbindSPSRepository(ISPSRepository sps_repository) {
+		 this.sps_repository = null;
+		 System.out.println("Unbinding Service --- SPS Repository");
 	 }  
 }

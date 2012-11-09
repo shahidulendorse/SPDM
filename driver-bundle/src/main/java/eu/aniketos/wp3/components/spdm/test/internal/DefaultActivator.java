@@ -1,3 +1,15 @@
+/*
+Copyright (c) 2012, Bernard Butler and Arif Fareed (Waterford Institute of Technology, Ireland), Project: FP7-ICT-257930 Aniketos
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+ -  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ -  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ -  Neither the name of WATERFORD INSTITUTE OF TECHNOLOGY nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
 package eu.aniketos.wp3.components.spdm.test.internal;
 
 import java.util.Dictionary;
@@ -9,27 +21,26 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 //import org.osgi.util.tracker.ServiceTracker;
 
-import eu.aniketos.wp3.components.spdm.ds.api.HelloWorldService;
-import eu.aniketos.data.IAgreementTemplate;
+import eu.aniketos.wp3.components.spdm.ds.api.ISPSRepository;
+import eu.aniketos.data.ISecurityDescriptor;
 import eu.aniketos.data.ISecurityProperty;
-import eu.aniketos.data.IServiceCentre;
 
 /**
  * Class which is Invoking DS service using default Activator
  * 
- * @author Bernard Butler
+ * @author Bernard Butler and M. Arif Fareed (TSSG)
  * 
  */
 public final class DefaultActivator implements BundleActivator {
 	// private static ServiceTracker componentHelloWorldServiceTracker;
 	private HelloWorldService hello_world;
-	private IAgreementTemplate agreement_template;
+	private ISecurityDescriptor security_descriptor;
 	private ISecurityProperty security_property;
-	private IServiceCentre service_centre;
+	private ISPSRepository sps_repository;
 
 	/**
 	 * 
-	 * @para BundleContext
+	 * @param context
 	 */
 	public void start(BundleContext context) throws Exception {
 
@@ -49,21 +60,14 @@ public final class DefaultActivator implements BundleActivator {
 
 		// 2.) Accessing Service With Classical OSGi Call
 		System.out.println("=== Default Activator ====");
-		// HelloWorldService
-		ServiceReference hello_serviceReference = context
-				.getServiceReference(HelloWorldService.class.getName());
-		this.hello_world = (HelloWorldService) context
-				.getService(hello_serviceReference);
-		System.out.println("Calling Declarative service using Bundle: "
-				+ this.hello_world.helloWorld());
 
 		// AgreementTemplate
-		ServiceReference agreement_tmp_serviceReference = context
-				.getServiceReference(IAgreementTemplate.class.getName());
-		this.agreement_template = (IAgreementTemplate) context
-				.getService(agreement_tmp_serviceReference);
+		ServiceReference security_descriptor_serviceReference = context
+				.getServiceReference(ISecurityDescriptor.class.getName());
+		this.security_descriptor = (ISecurityDescriptor) context
+				.getService(security_descriptor_serviceReference);
 		System.out.println("Calling Declarative service using Bundle: "
-				+ this.agreement_template);
+				+ this.security_descriptor);
 
 		// SecurityProperty
 		ServiceReference security_property_serviceReference = context
@@ -74,12 +78,12 @@ public final class DefaultActivator implements BundleActivator {
 				+ this.security_property);
 
 		// ServiceCentre
-		ServiceReference service_centre_serviceReference = context
-				.getServiceReference(IServiceCentre.class.getName());
-		this.service_centre = (IServiceCentre) context
-				.getService(service_centre_serviceReference);
+		ServiceReference sps_repository_serviceReference = context
+				.getServiceReference(ISPSRepository.class.getName());
+		this.sps_repository = (ISPSRepository) context
+				.getService(sps_repository_serviceReference);
 		System.out.println("Calling Declarative service using Bundle: "
-				+ this.service_centre);
+				+ this.sps_repository);
 
 	}
 

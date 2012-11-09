@@ -1,6 +1,6 @@
 # Please copy this template (along with the batch file) and use it in your module directory.
 # Fill in the below parameters, but do not change the @INCLUDE line
-@INCLUDE = "$(ANIKETOS_SVN_ROOT)\WP8\Templates\DoxyConfig\doxygen_general.cnf"
+@INCLUDE = "$(ANIKETOS_SVN_ROOT)/WP8/Templates/DoxyConfig/doxygen_general.cnf"
 
 # The PROJECT_NAME tag is a single word (or sequence of words) that should
 # identify the project. Note that if you do not use Doxywizard you need
@@ -25,15 +25,16 @@ PROJECT_BRIEF          = "SPDM module"
 # directories like "/usr/src/myproject". Separate the files or directories
 # with spaces.
 
-INPUT                  = .\driver-bundle\ \
-                         .\ds-api-bundle\ \
-                         .\ds-dao-bundle\ \
-                         .\ds-datatype-bundle\ \
-                         .\ds-impl-bundle\ \
-                         .\ds-test-bundle\ \
-                         .\provision\ \
-                         .\ui-bundle\
-
+INPUT                  = ./driver-bundle \
+                         ./ds-api-bundle \
+                         ./ds-certifier-bundle \
+                         ./ds-console-bundle \
+                         ./ds-datatype-bundle \
+                         ./ds-impl-bundle \
+                         ./ds-lifecycle-manager-bundle \
+                         ./ds-spdm-bundle \
+                         ./ds-test-bundle \
+                         ./ds-verifier-bundle
 
 # The EXCLUDE tag can be used to specify files and/or directories that should be
 # excluded from the INPUT source files. This way you can easily exclude a

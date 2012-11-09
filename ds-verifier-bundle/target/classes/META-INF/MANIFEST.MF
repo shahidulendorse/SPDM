@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Export-Package: eu.aniketos.wp3.components.spdm.verification;version="
+ 1.0.0.SNAPSHOT"
+Built-By: afareed
+Tool: Bnd-0.0.255
+Bundle-Name: eu.aniketos.wp3.components.spdm.ds-verifier-bundle [eu.an
+ iketos.wp3.components.spdm.verification]
+Created-By: Apache Maven Bundle Plugin
+Bundle-Version: 1.0.0.SNAPSHOT
+Build-Jdk: 1.6.0_33
+Bnd-LastModified: 1350036659064
+Bundle-ManifestVersion: 2
+Bundle-Description: Generated using Pax-Construct
+Import-Package: eu.aniketos.wp3.components.spdm.verification;version="
+ 1.0.0.SNAPSHOT"
+Bundle-SymbolicName: eu.aniketos.wp3.components.spdm.ds-verifier-bundl
+ e
+
