@@ -49,13 +49,17 @@ import org.apache.felix.scr.annotations.Service;
 import org.osgi.service.component.ComponentContext;
 
 //import org.osgi.service.log.LogService;
+/**
+ * 
+ * @author: Bernard Butler and M. Arif Fareed (TSSG)
+ *
+ */
 @Entity
 @Table(name = "SECURITYPROPERTIES")
 @Component(name="security-property-service")@Service
 public class SecurityProperty implements Serializable, ISecurityProperty{
 	
 	/**
-         * Reference implementation of ISecurityProperty.
 	 * @author: Bernard Butler and M. Arif Fareed (TSSG)
 	 */
 	private static final long serialVersionUID = 1L;
@@ -172,10 +176,7 @@ public class SecurityProperty implements Serializable, ISecurityProperty{
 	 * Overloaded Constructor for SecurityProperty
 	 * @param propertyID
 	 * @param value
-         * @param service
 	 * @param freshness
-	 * @param type
-	 * @param state
 	 */
 	public SecurityProperty(String propertyID, String value, IWebService service ,Date freshness, SPType type, SPState state){
 		this.propertyID = propertyID;
@@ -280,25 +281,25 @@ public class SecurityProperty implements Serializable, ISecurityProperty{
 	/**
 	 * Comparing instances of SecurityProperty. 
 	 */
-	@Override
-	public boolean equals(Object o) {
-
-		if (this == o)
-			return true;
-		if (o == null || !(o instanceof SecurityProperty)) {
-
-			return false;
-		}
-
-		SecurityProperty other = (SecurityProperty) o;
-
-		/*
-		 * equivalence by propertyID
-		 */
-		SecurityProperty castOther = (SecurityProperty) other;
-		return new EqualsBuilder().append(propertyID, castOther.getPropertyID()).append(propertyValue,
-				castOther.getPropertyValue()).append(freshness, castOther.getFreshness()).isEquals();
-	}
+//	@Override
+//	public boolean equals(Object o) {
+//
+//		if (this == o)
+//			return true;
+//		if (o == null || !(o instanceof SecurityProperty)) {
+//
+//			return false;
+//		}
+//
+//		SecurityProperty other = (SecurityProperty) o;
+//
+//		/*
+//		 * equivalence by propertyID
+//		 */
+//		SecurityProperty castOther = (SecurityProperty) other;
+//		return new EqualsBuilder().append(propertyID, castOther.getPropertyID()).append(propertyValue,
+//				castOther.getPropertyValue()).append(freshness, castOther.getFreshness()).isEquals();
+//	}
 	
 	/**
 	 * 

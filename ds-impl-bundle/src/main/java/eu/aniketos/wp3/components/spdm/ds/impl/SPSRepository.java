@@ -48,12 +48,15 @@ import javax.persistence.*;
 /**
  * A local class for manuplating AgreementTemplate & SecurityProperty.
  * 
- * @author Bernard Butler and M. Arif Fareed (TSSG)
+ * @author: Bernard Butler and M. Arif Fareed (TSSG)
  */
 
 @Component(name="sps-repository-service")@Service
 public class SPSRepository implements ISPSRepository {
 	
+	/**
+	 * @author: Bernard Butler and M. Arif Fareed (TSSG)
+	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Property(value="Security Centre Service")
@@ -95,7 +98,10 @@ public class SPSRepository implements ISPSRepository {
 	// bind = "bindSPSRepository",
 	// unbind = "unbindBidiMap")
 	// private  BidiMultiMap sps_repository;	
-	private BidiMultiMap<IWebService, ISecurityProperty> bidi_map;
+	private BidiMultiMap<IWebService, ISecurityProperty> service_property_map;
+
+	private BidiMultiMap<String,IWebService> service_map;
+	private BidiMultiMap<String, ISecurityProperty> property_map;
 
 	//There will be a certificate object here in the future.
 	
@@ -108,7 +114,12 @@ public class SPSRepository implements ISPSRepository {
 		// log.debug("Activate ReferenceManager");
 		System.out.println("Activate SPS Repository Service Component");
 //		log.log(LogService.LOG_INFO, "Activate Service Centre Component!");
-		this.bidi_map =  new BidiMultiHashMap<IWebService, ISecurityProperty>();
+		this.service_property_map =  new BidiMultiHashMap<IWebService, ISecurityProperty>();
+		
+		this.service_map =  new BidiMultiHashMap<String,IWebService>();
+		
+		this.property_map =  new BidiMultiHashMap<String, ISecurityProperty>();
+
 		// @TODO
 	}
 
@@ -139,12 +150,23 @@ public class SPSRepository implements ISPSRepository {
 	public void registerService(IWebService service_key, ISecurityDescriptor security_descriptor){
 		
 		for(ISecurityProperty p: security_descriptor.getProperties()) {
-			this.bidi_map.put(service_key, p);
+			this.service_property_map.put(service_key, p);
+			this.property_map.put(p.getPropertyID(), p);
+
 		}
+		
+		if(service_key!=null) {
+			this.service_map.put(service_key.getServiceID(), service_key);
+		}
+		
 	}
 
 	public void registerService(IWebService service_key, ISecurityProperty property) {
-		this.bidi_map.put(service_key, property);
+		
+		this.service_property_map.put(service_key, property);
+		this.service_map.put(service_key.getServiceID(), service_key);
+		this.property_map.put(property.getPropertyID(), property);
+		
 	}
 	
 	public  void registerSecurityProperty(ISecurityProperty property, IWebService service_key) {
@@ -156,14 +178,30 @@ public class SPSRepository implements ISPSRepository {
 	}
 
 	public Set<ISecurityProperty> lookUpSecurityProperty(IWebService service_key) {
-		return this.bidi_map.valueSet(service_key);
+		return this.service_property_map.valueSet(service_key);
 	}
 
 	public Set<IWebService> lookupService(ISecurityProperty property_value) {
-		return this.bidi_map.keySet(property_value);
+		return this.service_property_map.keySet(property_value);
 	}
 
+	public ISecurityProperty getSecurityProperty(String sp_id) {
+		
+		for(ISecurityProperty sp: this.property_map.valueSet(sp_id)) {
+			return sp;
+		}
+		return null;
+	}
 
+	public IWebService getService(String service_id) {
+
+		for(IWebService ws: this.service_map.valueSet(service_id)) {
+			return ws;
+		}
+		return null;
+	}
+
+	
 	public void  printRegisteredServices() {
 		
 	}
@@ -174,25 +212,38 @@ public class SPSRepository implements ISPSRepository {
 
 
 	public int repository_size() {
-		return this.bidi_map.size();
+		return this.service_property_map.size();
 	}
 
 	public void clear_repository() {
-		this.bidi_map.clear();
+		this.service_property_map.clear();
+		this.service_map.clear();
+		this.property_map.clear();
+
 	}
 	
 	public void removeSecurityProperty(ISecurityProperty property_value) {
-		this.bidi_map.removeValue(property_value);
+		this.service_property_map.removeValue(property_value);
+		this.property_map.remove(property_value);
 	}
 	
 	public void removeService(IWebService service_key) {
-		this.bidi_map.removeKey(service_key);
+		this.service_property_map.removeKey(service_key);
+		this.service_map.remove(service_key);
 	}
 
 	public Set<Map.Entry<IWebService, ISecurityProperty>>  getEntriest() {
-		return this.bidi_map.entrySet();
+		return this.service_property_map.entrySet();
 	}
-	
+
+	public Set<Map.Entry<String, ISecurityProperty>>  getPropertyEntries() {
+		return this.property_map.entrySet();
+	}
+
+	public Set<Map.Entry<String, IWebService>>  getServiceEntries() {
+		return this.service_map.entrySet();
+	}
+
 	public void persistEntrySet(Map.Entry<IWebService, ISecurityProperty> entry) {
         
 	}
@@ -217,12 +268,26 @@ public class SPSRepository implements ISPSRepository {
 		StringBuffer bf = new StringBuffer();
 		
 		bf.append("SPS Repository Entries: \n");
-		Set<Map.Entry<IWebService,ISecurityProperty>> sps_set = this.bidi_map.entrySet(); 	 
+		Set<Map.Entry<IWebService,ISecurityProperty>> sps_set = this.service_property_map.entrySet(); 	 
 
 		for(Map.Entry<IWebService,ISecurityProperty> entry: sps_set) {
 			 bf.append(entry);	 
 		}
-		
+
+		Set<Map.Entry<String, ISecurityProperty>> sp_set = this.property_map.entrySet(); 	 
+		bf.append("Security Properties Mapping: \n");
+
+		for(Map.Entry<String, ISecurityProperty> entry: sp_set) {
+			 bf.append(sp_set);	 
+		}
+
+		Set<Map.Entry<String, IWebService>> ws_set = this.service_map.entrySet(); 	 
+		bf.append("Sevice Mapping: \n");
+
+		for(Map.Entry<String, IWebService> entry: ws_set) {
+			 bf.append(ws_set);	 
+		}
+
 		return bf.toString();
 	}
 	

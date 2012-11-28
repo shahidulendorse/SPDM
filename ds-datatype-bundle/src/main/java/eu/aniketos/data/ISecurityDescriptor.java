@@ -25,7 +25,7 @@ import java.util.List;
  * 
  * @author David Lamb, LJMU
  * Revised by by Bo Zhou LJMU Aug 2011 
- * Revised by by Bernard Butler and Barry Mulcahy & Barry Mulcahy TSSG Aug 2011
+ * Revised by by Bernard Butler & Barry Mulcahy TSSG Aug 2011
  * 
  */
 public interface ISecurityDescriptor

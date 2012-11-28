@@ -14,7 +14,9 @@ package eu.aniketos.wp3.components.spdm.ds.api;
 
 import java.util.Set;
 
+import eu.aniketos.data.ISecurityDescriptor;
 import eu.aniketos.data.ISecurityProperty;
+import eu.aniketos.data.SPState;
 
 public interface ISPDMService {
 
@@ -22,15 +24,35 @@ public interface ISPDMService {
 	 
 	 public abstract Set<IWebService> lookupService(ISecurityProperty sp);
 
-	 public abstract void registerService(IWebService service, ISecurityProperty sp);
 	 
+	 public abstract void registerService(IWebService service, ISecurityProperty sp);
+	 public abstract void registerService(IWebService service, ISecurityDescriptor sd);
+
 	 public abstract void unregisterService(IWebService service);
 	 
+	 
+	 public abstract Set<ISecurityProperty> getVerifiedProperties(IWebService service);
+	 
+	 public abstract Set<ISecurityProperty> getProperties(IWebService service, SPState propertyState); 
+	 
+	 public abstract ISecurityProperty getSecurityProperty(String sp_id);
+	 
+	 public abstract IWebService getService(String service_id);
+
 	 public abstract void removeSeucrityProeprty(ISecurityProperty sp);
 
 	 public abstract void emptyCache();
 
 	 public abstract int cache_size();
+	 
 	 public abstract void  persist_cache();
+
 	 public abstract void print_repository();
+	 
+	 public abstract ISPSRepository fetchRepository();
+	 
+	 public abstract void print_sp_entries();
+	 
+	 public abstract void print_ws_entries();
+
 }

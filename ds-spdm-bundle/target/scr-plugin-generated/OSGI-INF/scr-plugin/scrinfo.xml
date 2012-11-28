@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0">
     <scr:component enabled="true" name="sp-lifecyclemanager-service" activate="activateLifeCycleManager" deactivate="deactivateLifeCycleManager">
         <implementation class="eu.aniketos.wp3.components.spdm.LifeCycleManager"/>
         <service servicefactory="false">

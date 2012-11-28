@@ -8,14 +8,14 @@ Export-Package: eu.aniketos.wp3.components.spdm.ds.api;uses:="eu.anike
  ts.spdm.ds.api,org.osgi.framework,eu.aniketos.data,javax.persistence,
  org.osgi.service.component";version="1.0.0.SNAPSHOT"
 Service-Component: OSGI-INF/serviceComponents.xml
-Built-By: bbutler
+Built-By: afareed
 Tool: Bnd-0.0.255
 Bundle-Name: eu.aniketos.wp3.components.spdm.ds-spdm-bundle [eu.aniket
  os.wp3.components.spdm]
 Created-By: Apache Maven Bundle Plugin
-Build-Jdk: 1.7.0_09
+Build-Jdk: 1.6.0_33
 Bundle-Version: 1.0.0.SNAPSHOT
-Bnd-LastModified: 1352483497846
+Bnd-LastModified: 1354123666951
 Bundle-ManifestVersion: 2
 Bundle-Description: Generated using Pax-Construct
 Import-Package: eu.aniketos.data;version="1.0.0.SNAPSHOT",eu.aniketos.

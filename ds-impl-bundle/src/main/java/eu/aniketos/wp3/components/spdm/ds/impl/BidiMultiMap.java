@@ -80,7 +80,7 @@ public interface BidiMultiMap<K, V> extends Map<K, V> {
 
 	/**
 	 * Gets the keySet view of the map. Changes made to the view affect this
-	 * map. To simply iterate through the keys, use mapIterator().
+	 * map. To simply iterate through the keys, use {@link #mapIterator()}.
 	 * 
 	 * @param value
 	 *            the value

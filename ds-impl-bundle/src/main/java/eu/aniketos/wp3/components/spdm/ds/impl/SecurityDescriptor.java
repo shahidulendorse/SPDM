@@ -61,12 +61,15 @@ import org.osgi.service.component.ComponentContext;
  * An Security Descriptor is a collection of security properties. This class
  * provider the necessary methods to manipulate SecurityProperty
  * 
- * @author Bernard Butler and M. Arif Fareed (TSSG)
+ * @author: Bernard Butler and M. Arif Fareed (TSSG)
  *
  */
 @Component(name="securitydescriptor-service")@Service
 public class SecurityDescriptor implements Serializable, ISecurityDescriptor {
 	
+	/**
+	 * @author: Bernard Butler and M. Arif Fareed (TSSG)
+	 */
 	private static final long serialVersionUID = 1L;
 
 	@Property(value="Security Descriptor Service")

@@ -15,7 +15,7 @@ package eu.aniketos.wp3.components.spdm.ds.api;
 
 
 /**
- * IWebService is an interface to represent a generic web service
+ * IServiceProvider is an interface to helps to certify a security property
  * @author Bernard Butler and M. Arif Fareed (TSSG)
  *
  */
@@ -25,6 +25,7 @@ public interface IWebService {
 	public abstract void setServiceID(String id);	
 	//ID is URI
 	public abstract String getServiceID();	
+
 
 	public abstract String toString();
 	

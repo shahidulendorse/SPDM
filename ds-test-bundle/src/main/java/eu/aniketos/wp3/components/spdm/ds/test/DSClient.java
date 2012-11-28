@@ -11,6 +11,11 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package eu.aniketos.wp3.components.spdm.ds.test;
+/**
+ * Declarative Service Client
+ * @author Bernard Butler and M. Arif Fareed (TSSG)
+ * 
+ */
 
 import org.apache.felix.scr.annotations.Activate;
 import org.osgi.service.component.ComponentContext;
@@ -31,16 +36,12 @@ import eu.aniketos.data.ISecurityProperty;
 
 /**
  * 
- * Declarative Service Client
  * @author Bernard Butler and M. Arif Fareed (TSSG)
  *
  */
 @Component
 public class DSClient {
 
-
-	
-	 //SecurityDescriptor CLIENT Ref. CODE Template
 	 @Reference(name = "security_desciptor",
 	 cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE,
 	 referenceInterface = ISecurityDescriptor.class,
@@ -50,7 +51,6 @@ public class DSClient {
 	 unbind = "unbindSecurityDescriptor")
 	 private ISecurityDescriptor security_descriptor;
 	 
-	 //SecurityProperty CLIENT Ref. CODE Template
 	 @Reference(name = "security_property",
 	 cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE,
 	 referenceInterface = ISecurityProperty.class,
@@ -60,7 +60,6 @@ public class DSClient {
 	 unbind = "unbindSecurityProperty")
 	 private ISecurityProperty security_property;
 
-	 //ServiceCentre CLIENT Ref. CODE Template
 	 @Reference(name = "sps_repository",
 	 cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE,
 	 referenceInterface = ISPSRepository.class,
@@ -71,7 +70,6 @@ public class DSClient {
 	 private ISPSRepository sps_repository;
 			 
 	 
-	 //ServiceCentre CLIENT Ref. CODE Template
 	 @Reference(name = "web_service",
 	 cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE,
 	 referenceInterface = IWebService.class,
@@ -101,18 +99,18 @@ public class DSClient {
 
 	 
 	 /**
-	  * Announcing SecurityDescriptor as an OSGi Service
-	  * @param security_descriptor
+	  * Announcing AgreementTemplate as an OSGi Service
+	  * @param agreement_template service
 	  */
-	//Binding & Unbinding SecurityDescriptor
+	//Binding & Unbinding AgreementTemplate
 	 public void bindSecurityDescriptor(ISecurityDescriptor security_descriptor) {
 		 this.security_descriptor = security_descriptor;
 		 System.out.println("Binding Service --- SecurityDescriptor");
 	 }
 	
 	 /**
-	  * Unbinding SecurityDescriptor service
-	  * @param security_descriptor
+	  * Unbinding AgreementTemplate service
+	  * @param agreement_template
 	  */
 	 public void unbindSecurityDescriptor(ISecurityDescriptor security_descriptor) {
 		 this.security_descriptor = null;
@@ -139,8 +137,8 @@ public class DSClient {
 	 }  
 	 
 	 /**
-	  * Announcing WebService as an OSGi Service 
-	  * @param web_service service
+	  * Announcing SecurityProperty as an OSGi Service 
+	  * @param security_property service
 	  */
 	 //Binding & Unbinding SecurityProperty 
 	 public void bindWebService(IWebService web_service) {
@@ -149,8 +147,8 @@ public class DSClient {
 	 }
 	
 	 /**
-	  * Unbinding WebService service
-	  * @param web_service
+	  * Unbinding SecurityProperty service
+	  * @param security_property
 	  */
 	 public void unbindWebService(IWebService web_service) {
 		 this.web_service = null;
@@ -158,31 +156,21 @@ public class DSClient {
 	 }  
 	 
 	 /**
-	  * Announcing SPSRepository as an OSGi Service
-	  * @param sps_repository
+	  * Announcing ServiceCentre as an OSGi Service
+	  * @param service_centre
 	  */
 	 //Binding & Unbinding ServiceCentre
 	 public void bindSPSRepository(ISPSRepository sps_repository) {
 		 this.sps_repository = sps_repository;
 		 System.out.println("Binding Service --- SPS Repository");
 		 		 
-		 
-//		 this.web_service.setID( "http://testservice?wsdl");
-		 
-//		 this.sps_repository.put("a", "1");
-//		 this.sps_repository.put("b", "1");
-//		 this.sps_repository.put("c", "1");
-//		 this.sps_repository.put("d", "2");
-//		 this.sps_repository.put("e", "2");
-//		 this.sps_repository.put("f", "3");
-//		 this.sps_repository.put("g", "4");
-		 System.out.println("SPS Repository Size ======:" + this.sps_repository.repository_size());
+	 System.out.println("SPS Repository Size ======:" + this.sps_repository.repository_size());
 		
 	 }
 	
 	 /**
-	  * Unbinding ISPSRepository
-	  * @param sps_repository
+	  * Unbinding ServiceCentre
+	  * @param service_centre
 	  */
 	 public void unbindSPSRepository(ISPSRepository sps_repository) {
 		 this.sps_repository = null;

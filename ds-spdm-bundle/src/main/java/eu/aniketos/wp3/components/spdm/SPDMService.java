@@ -11,10 +11,16 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package eu.aniketos.wp3.components.spdm;
+/**
+ * Declarative Service Client
+ * @author Bernard Butler and M. Arif Fareed (TSSG)
+ * 
+ */
 
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.Vector;
 
 import org.apache.felix.scr.annotations.Activate;
@@ -39,10 +45,11 @@ import eu.aniketos.wp3.components.spdm.ds.api.ISPDMService;
 
 import eu.aniketos.data.ISecurityDescriptor;
 import eu.aniketos.data.ISecurityProperty;
+import eu.aniketos.data.SPState;
+import eu.aniketos.data.SPType;
 
 /**
  * 
- * Declarative Service Client
  * @author Bernard Butler and M. Arif Fareed (TSSG)
  *
  */
@@ -60,7 +67,7 @@ public class SPDMService implements ISPDMService {
 	@Property(value = "http://localhost:9091/spdm_service")
 	static final String CONSTANT_NAME_4 = "org.apache.cxf.ws.address";
 	
-	 //SecurityDescriptor CLIENT Ref. CODE Template
+	 //AgreementTemplate CLIENT Ref. CODE Template
 	 @Reference(name = "security_desciptor",
 	 cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE,
 	 referenceInterface = ISecurityDescriptor.class,
@@ -116,7 +123,7 @@ public class SPDMService implements ISPDMService {
 	 
 	/**
      * Register DSClient as a service with OSGi container
-	 * @param context
+	 * @param cc
 	 */
 	@Activate
 	public void activateSPDMService(ComponentContext context) {
@@ -127,11 +134,11 @@ public class SPDMService implements ISPDMService {
 		System.out.println("Calling Declarative Service: "
 		+ this.security_property);
 
-		init();
+		//init();
 	}
 
 	/**
-	 * UnRegister SPDMService Service with OSGi container
+	 * UnRegister SPDMService Service with OSCi container
 	 * 
 	 * @param context
 	 */
@@ -143,25 +150,25 @@ public class SPDMService implements ISPDMService {
 		// "Deactivate Agreement Template Component!");
 	}
 	
-	protected void init() {
-		this.sps_repository.registerService(this.web_service, this.security_descriptor);
-		System.out.println("Repository Size : "+ this.sps_repository.repository_size());
-		System.out.println("+++ Printing SPS Repository +++: "+ this.sps_repository.lookUpSecurityProperty(this.web_service));
-	}
+//	protected void init() {
+//		this.sps_repository.registerService(this.web_service, this.security_descriptor);
+//		System.out.println("Repository Size : "+ this.sps_repository.repository_size());
+//		System.out.println("+++ Printing SPS Repository +++: "+ this.sps_repository.lookUpSecurityProperty(this.web_service));
+//	}
 
 	 /**
-	  * Announcing SecurityDescriptor as an OSGi Service
-	  * @param security_descriptor service
+	  * Announcing AgreementTemplate as an OSGi Service
+	  * @param agreement_template service
 	  */
-	//Binding & Unbinding SecurityDescriptor
+	//Binding & Unbinding AgreementTemplate
 	 public void bindSecurityDescriptor(ISecurityDescriptor security_descriptor) {
 		 this.security_descriptor = security_descriptor;
 		 System.out.println("Binding Service --- SecurityDescriptor");
 	 }
 	
 	 /**
-	  * Unbinding SecurityDescriptor service
-	  * @param security_descriptor
+	  * Unbinding AgreementTemplate service
+	  * @param agreement_template
 	  */
 	 public void unbindSecurityDescriptor(ISecurityDescriptor security_descriptor) {
 		 this.security_descriptor = null;
@@ -188,17 +195,18 @@ public class SPDMService implements ISPDMService {
 	 }  
 	 
 	 /**
-	  * Announcing WebServiceas an OSGi Service 
-	  * @param web_service service
+	  * Announcing SecurityProperty as an OSGi Service 
+	  * @param security_property service
 	  */
+	 //Binding & Unbinding SecurityProperty 
 	 public void bindWebService(IWebService web_service) {
 		 this.web_service = web_service;
 		 System.out.println("Binding Service --- Web Serive");
 	 }
 	
 	 /**
-	  * Unbinding WebService service
-	  * @param web_service
+	  * Unbinding SecurityProperty service
+	  * @param security_property
 	  */
 	 public void unbindWebService(IWebService web_service) {
 		 this.web_service = null;
@@ -207,17 +215,18 @@ public class SPDMService implements ISPDMService {
 
 	 
 	 /**
-	  * Announcing PersistenceManager as an OSGi Service 
-	  * @param persistence_manager service
+	  * Announcing SecurityProperty as an OSGi Service 
+	  * @param security_property service
 	  */
+	 //Binding & Unbinding SecurityProperty 
 	 public void bindPersistenceManager(IPersistenceManager persistence_manager) {
 		 this.persistence_manager = persistence_manager;
 		 System.out.println("Binding Service --- Persistence Manager");
 	 }
 	
 	 /**
-	  * Unbinding PersistenceManager service
-	  * @param persistence_manager
+	  * Unbinding SecurityProperty service
+	  * @param security_property
 	  */
 	 public void unbindPersistenceManager(IPersistenceManager persistence_manager) {
 		 this.persistence_manager = null;
@@ -226,8 +235,8 @@ public class SPDMService implements ISPDMService {
 
 	 
 	 /**
-	  * Announcing SPSRepository as an OSGi Service
-	  * @param sps_repository
+	  * Announcing ServiceCentre as an OSGi Service
+	  * @param service_centre
 	  */
 	 //Binding & Unbinding ServiceCentre
 	 public void bindSPSRepository(ISPSRepository sps_repository) {
@@ -249,8 +258,8 @@ public class SPDMService implements ISPDMService {
 	 }
 	
 	 /**
-	  * Unbinding SPSRepository
-	  * @param sps_repository
+	  * Unbinding ServiceCentre
+	  * @param service_centre
 	  */
 	 public void unbindSPSRepository(ISPSRepository sps_repository) {
 		 this.sps_repository = null;
@@ -262,6 +271,32 @@ public class SPDMService implements ISPDMService {
 		 return this.sps_repository.lookUpSecurityProperty(service);
 	 }
 	 
+	 public Set<ISecurityProperty> getVerifiedProperties(IWebService service){
+		 Set<ISecurityProperty> verified_Set = this.sps_repository.lookUpSecurityProperty(service); 
+		 
+		 for(ISecurityProperty sp: verified_Set) {
+			 if(sp.getState() != SPState.Verified) {
+				 verified_Set.remove(sp);
+			 }
+		 }
+		 
+		 return verified_Set;
+	 } 
+
+	 public Set<ISecurityProperty> getProperties(IWebService service, SPState propertyState) {
+
+		 Set<ISecurityProperty> verified_Set = this.sps_repository.lookUpSecurityProperty(service); 
+		 
+		 for(ISecurityProperty sp: verified_Set) {
+			 if(sp.getState() != propertyState) {
+				 verified_Set.remove(sp);
+			 }
+		 }
+		 
+		 return verified_Set;
+		 
+	 }
+	 
 	 public Set<IWebService> lookupService(ISecurityProperty sp) {
 		 return this.sps_repository.lookupService(sp);
      }
@@ -270,11 +305,23 @@ public class SPDMService implements ISPDMService {
 		 this.sps_repository.registerService(service, sp);
 	 }
 	 
+	 public void registerService(IWebService service, ISecurityDescriptor sd){
+		 this.sps_repository.registerService(service, sd);
+	 }
+
 	 public void unregisterService(IWebService service){
 		 Set<ISecurityProperty> properties = this.lookUpSecurityProperty(service);
 		 for(ISecurityProperty sp: properties) {
 			 this.sps_repository.removeSecurityProperty(sp);	 
 		 }		 
+	 }
+
+	 public ISecurityProperty getSecurityProperty(String sp_id) {
+		 return this.sps_repository.getSecurityProperty(sp_id);
+	 }
+	
+	 public IWebService getService(String service_id) {
+		return this.sps_repository.getService(service_id);  
 	 }
 
 	 public void removeSeucrityProeprty(ISecurityProperty sp){
@@ -307,15 +354,41 @@ public class SPDMService implements ISPDMService {
 		 
 	 }
 
+	 
 	 public void print_repository() {
 		 
 		 Set<Map.Entry<IWebService,ISecurityProperty>> sps_set = this.sps_repository.getEntriest(); 
 		 
-		 for(Map.Entry<IWebService,ISecurityProperty> entry: sps_set) {
+//		 for(Map.Entry<IWebService,ISecurityProperty> entry: sps_set) {
 			 System.out.println(sps_set);	 
-		 }
+//		 }
 		 
 	 }
- 
+
+	 public void print_sp_entries() {
+		 
+		 Set<Map.Entry<String,ISecurityProperty>> sp_set = this.sps_repository.getPropertyEntries(); 
+		 
+//		 for(Map.Entry<String,ISecurityProperty> entry: sp_set) {
+			 System.out.println(sp_set);	 
+//		 }
+		 
+	 }
+
+	 public void print_ws_entries() {
+		 
+		 Set<Map.Entry<String,IWebService>> ws_set = this.sps_repository.getServiceEntries(); 
+		 
+//		 for(Map.Entry<String,IWebService> entry: ws_set) {
+			 System.out.println(ws_set);	 
+//		 }
+		 
+	 }
+
+	 public ISPSRepository fetchRepository() {
+		 return this.sps_repository;
+	 }
+
+	 
  }
 

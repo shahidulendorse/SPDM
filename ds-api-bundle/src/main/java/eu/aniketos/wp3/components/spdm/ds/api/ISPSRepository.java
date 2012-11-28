@@ -42,6 +42,14 @@ public interface ISPSRepository {
 	
 	public abstract void removeSecurityProperty(ISecurityProperty property_value);
 	
+	public abstract ISecurityProperty getSecurityProperty(String sp_id);
+	
+	public abstract IWebService getService(String service_id);
+	
+	public abstract Set<Map.Entry<String, IWebService>>  getServiceEntries();
+	
+	public abstract Set<Map.Entry<String, ISecurityProperty>>  getPropertyEntries();
+	
 //	public abstract void removeService(IWebService service_key);
 
 //	public abstract EntrySet<IService, ISecurityProperty> getRepositoryEntries();

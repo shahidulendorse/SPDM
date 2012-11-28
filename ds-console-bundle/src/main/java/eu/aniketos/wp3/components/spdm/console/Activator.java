@@ -25,7 +25,7 @@ import java.util.Hashtable;
 
 /**
  * Console Command Activator class which registers a list of Commands 
- * as properties with OSGi containers (Felix, Equinox and knopflerfish)
+ * as properties with OSGi containers (Felix, Equinox, knopflerfish)
  * @author Bernard Butler and M. Arif Fareed (TSSG)
  *
  */
@@ -47,13 +47,16 @@ public class Activator implements BundleActivator {
         props.put("org.knowhowlab.osgi.shell.group.id", "spdm");
         props.put("org.knowhowlab.osgi.shell.group.name", " commands");
         props.put("org.knowhowlab.osgi.shell.commands", new String[][]{
-		{"lssp","lssp,lssp - List registered Security Properties."},
-		{"lsws","lsws,lsws - List registered services."},
-		{"unregister","unregister,unregister - unregister services."},
-		{"delsp","delsp,delsp <id> - delete Security Property."},
-		{"register","register,register - registering Service & Security Descriptor."},
-		{"cache","cache,cache - Nr. of Entries in SPDM Repository."},
-		{"commands","commands,commands - List supported commands."}});
+        		{"lssp", "lssp,lssp - List registered Security Properties."},
+        			{"lsws", "lsws,lsws - List registered services."},
+        				{"unregister", "unregister,unregister - unregister services."},
+        					{"delsp", "delsp,delsp <id> - delete Security Property."},
+        					{"getsp", "getsp,getsp <id> - search Security Property by ID."},
+        					{"getws", "getws,getws <id> - search Service by ID."},
+
+        					{"register","register,register - registering Service & Security Descriptor."},
+        							{"cache","cache,cache - Nr. of Entries in SPDM Repository."},
+        								{"commands","commands,commands - List supported commands."}});
         
         serviceRegistration = context.registerService(CommandLineService.class.getName(), new CommandLineService(context), props);
    

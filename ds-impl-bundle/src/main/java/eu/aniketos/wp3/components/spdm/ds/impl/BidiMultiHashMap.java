@@ -1494,7 +1494,7 @@ public class BidiMultiHashMap<K, V> extends AbstractMap<K, V> implements
 	// -----------------------------------------------------------------------
 	/**
 	 * Gets the keySet view of the map. Changes made to the view affect this
-	 * map. To simply iterate through the keys, use mapIterator().
+	 * map. To simply iterate through the keys, use {@link #mapIterator()}.
 	 * 
 	 * @return the keySet view
 	 */
@@ -1508,7 +1508,7 @@ public class BidiMultiHashMap<K, V> extends AbstractMap<K, V> implements
 
 	/**
 	 * Gets the keySet view of the map. Changes made to the view affect this
-	 * map. To simply iterate through the keys, use mapIterator().
+	 * map. To simply iterate through the keys, use {@link #mapIterator()}.
 	 * 
 	 * @param value
 	 *            the value

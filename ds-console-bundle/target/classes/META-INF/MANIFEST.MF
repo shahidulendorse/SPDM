@@ -2,15 +2,15 @@ Manifest-Version: 1.0
 Export-Package: eu.aniketos.wp3.components.spdm.console;uses:="org.osg
  i.framework,eu.aniketos.wp3.components.spdm.ds.api,eu.aniketos.data";
  version="1.0.0.SNAPSHOT"
-Built-By: bbutler
+Built-By: afareed
 Tool: Bnd-1.15.0
 Bundle-Name: eu.aniketos.wp3.components.spdm.ds-console-bundle [eu.ani
  ketos.wp3.components.spdm.console]
 Created-By: Apache Maven Bundle Plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Build-Jdk: 1.7.0_09
+Build-Jdk: 1.6.0_33
 Bundle-Version: 1.0.0.SNAPSHOT
-Bnd-LastModified: 1352483500968
+Bnd-LastModified: 1354123668190
 Bundle-ManifestVersion: 2
 Bundle-Activator: eu.aniketos.wp3.components.spdm.console.Activator
 Bundle-Description: Generated using Pax-Construct

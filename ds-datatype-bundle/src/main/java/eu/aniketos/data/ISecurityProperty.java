@@ -16,7 +16,7 @@ import java.util.Date;
 import java.security.cert.X509Certificate;
 
 /**
- * ISecurityProperty is an interface that specify the behavior of the
+ * ISecurityProerpty is an interface that specify the behavior of the
  * Security Properties.
  * 
  * @author Bernard Butler and M. Arif Fareed (TSSG)

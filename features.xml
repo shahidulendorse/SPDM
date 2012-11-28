@@ -19,7 +19,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 <bundle>mvn:org.apache.felix/javax.servlet/1.0.0</bundle>
 <bundle>mvn:org.apache.felix/org.osgi.compendium/1.4.0</bundle>
 <bundle>mvn:org.apache.felix/javax.servlet/1.0.0</bundle>
-<bundle> mvn:org.apache.felix/org.osgi.compendium/1.4.0</bundle>
+<bundle>mvn:org.apache.felix/org.osgi.compendium/1.4.0</bundle>
 
 <bundle>mvn:org.apache.derby/derby/10.8.1.2</bundle>
 <bundle>mvn:commons-pool/commons-pool/1.5.5</bundle>
@@ -34,11 +34,13 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 <bundle>mvn:org.apache.openjpa/openjpa/2.1.1</bundle>
 <bundle>mvn:org.apache.aries/org.apache.aries.util/0.4</bundle>
 
+
+
 <bundle>mvn:eu.aniketos.wp3.components.spdm/ds-datatype-bundle/1.0-SNAPSHOT</bundle>
 <bundle>mvn:eu.aniketos.wp3.components.spdm/ds-api-bundle/1.0-SNAPSHOT</bundle>
 <bundle>mvn:eu.aniketos.wp3.components.spdm/ds-impl-bundle/1.0-SNAPSHOT</bundle>
 <bundle>mvn:eu.aniketos.wp3.components.spdm/ds-spdm-bundle/1.0-SNAPSHOT</bundle>
 <bundle>mvn:eu.aniketos.wp3.components.spdm/ds-console-bundle/1.0-SNAPSHOT/</bundle>
-  
+<bundle>mvn:eu.aniketos.wp3.components.spdm/ds-test-bundle/1.0-SNAPSHOT/</bundle>  
   </feature>
 </features>

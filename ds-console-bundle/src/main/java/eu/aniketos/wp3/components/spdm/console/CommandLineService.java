@@ -21,6 +21,7 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.util.Set;
 
+import eu.aniketos.wp3.components.spdm.ds.api.ISPDMService;
 import eu.aniketos.wp3.components.spdm.ds.api.ISPSRepository;
 import eu.aniketos.wp3.components.spdm.ds.api.IWebService;
 
@@ -34,9 +35,9 @@ import eu.aniketos.data.ISecurityProperty;
  * and its relevant Security Properties.
  * lssp - list Security Properties
  * lsag - list Agreement Templates
- * delsp id - delete Security Property by its id
- * addag value - add Agreement Template by its value
- * addsp value freshness agreementtemplate_id - add Security Property by its attributes
+ * delsp <id> - delete Security Property
+ * addag <value> - add Agreement Template
+ * addsp <value> <freshness> <agreementtemplate_id> - add Security Property
  * commands - list of commands
  * 
  * @author Bernard Butler and M. Arif Fareed (TSSG)
@@ -48,9 +49,11 @@ public class CommandLineService {
 
 	private ISecurityDescriptor security_descriptor;
 	private ISecurityProperty security_property;
-	private ISPSRepository sps_repository;	
+//	private ISPSRepository sps_repository;	
 	private IWebService web_service;
-	
+
+	private ISPDMService spdm_service;
+
     /**
      * Obtain BundleContext Handler
      * @param bc
@@ -76,13 +79,13 @@ public class CommandLineService {
 		System.out.println("Calling Declarative service using Bundle: "
 				+ this.security_property);
 
-		// SPS Repository
-		ServiceReference sps_repository_serviceReference = this.bc
-				.getServiceReference(ISPSRepository.class.getName());
-		this.sps_repository = (ISPSRepository) this.bc
-				.getService(sps_repository_serviceReference);
-		System.out.println("Calling Declarative service using Bundle: "
-				+ this.sps_repository);
+//		// SPS Repository
+//		ServiceReference sps_repository_serviceReference = this.bc
+//				.getServiceReference(ISPSRepository.class.getName());
+//		this.sps_repository = (ISPSRepository) this.bc
+//				.getService(sps_repository_serviceReference);
+//		System.out.println("Calling Declarative service using Bundle: "
+//				+ this.sps_repository);
 
 		// WebService
 		ServiceReference webservice_serviceReference = this.bc
@@ -92,7 +95,15 @@ public class CommandLineService {
 		System.out.println("Calling Declarative service using Bundle: "
 				+ this.web_service);
 
-		
+
+		// SPDM Service
+		ServiceReference spdm_serviceReference = this.bc
+				.getServiceReference(ISPDMService.class.getName());
+		this.spdm_service = (ISPDMService) this.bc
+				.getService(spdm_serviceReference);
+		System.out.println("Calling Declarative service using Bundle: "
+				+ this.spdm_service);
+
     }
     
     /**
@@ -108,6 +119,8 @@ public class CommandLineService {
     		out.println( index++ + "." + " lssp,lssp - List registered Security Properties.");
     		out.println( index++ + "." + " lsws,lsws - List registered services.");
     		out.println( index++ + "." + " delsp,delsp <id> - delete Security Property.");
+    		out.println( index++ + "." + " getsp,getsp <id> - search Security Property by ID.");
+    		out.println( index++ + "." + " getws,getws <id> - search Service by ID.");
     				out.println( index++ + "." + " unregister,unregister - unregister services.");
     								out.println( index++ + "." + " cache,cache - Nr. of Entries in SPDM Repository.");
     								out.println( index++ + "." + " register,register - registering Service & Security Descriptor.");
@@ -122,8 +135,8 @@ public class CommandLineService {
      */
     public void cache(PrintWriter out, String... args) {
     	try{
-    		System.out.println("Repository Size : "+ this.sps_repository.repository_size());
-    		System.out.println(this.sps_repository);
+    		System.out.println("Repository Size : "+ this.spdm_service.cache_size());
+    		this.spdm_service.print_repository();
          } catch (Exception e) {
     			e.printStackTrace(out);
         }
@@ -136,7 +149,7 @@ public class CommandLineService {
      */
     public void lssp(PrintWriter out, String... args) {
         try {
-    		System.out.println(this.sps_repository.lookUpSecurityProperty(this.web_service));
+    		System.out.println(this.spdm_service.lookUpSecurityProperty(this.web_service));
         } catch (Exception e) {
             e.printStackTrace(out);
         }
@@ -150,9 +163,9 @@ public class CommandLineService {
      */
     public void lsws(PrintWriter out, String... args) {
         try {
-        	Set<ISecurityProperty> securityProperties = this.sps_repository.lookUpSecurityProperty(this.web_service);
+        	Set<ISecurityProperty> securityProperties = this.spdm_service.lookUpSecurityProperty(this.web_service);
         	for(ISecurityProperty p: securityProperties) {
-        		System.out.println(this.sps_repository.lookupService(p));
+        		System.out.println(this.spdm_service.lookupService(p));
         		break;
         	}
         } catch (Exception e) {
@@ -174,8 +187,8 @@ public class CommandLineService {
     //    }
         try {
         	System.out.println("Unregistering Default Security Properties");
-
-        	this.sps_repository.clear_repository();
+        	this.spdm_service.emptyCache();
+        	
         } catch (Exception e) {
             e.printStackTrace(out);
         }
@@ -194,13 +207,13 @@ public class CommandLineService {
         }
         try {
             ISecurityProperty del_p;
-        	Set<ISecurityProperty> securityProperties = this.sps_repository.lookUpSecurityProperty(this.web_service);
+        	Set<ISecurityProperty> securityProperties = this.spdm_service.lookUpSecurityProperty(this.web_service);
         	for(ISecurityProperty p: securityProperties) {
         	//	System.out.println("Property ID: " + args[0]);
         		if(p.getPropertyID().equals(args[0])){
         			del_p = p;
         			out.println("Removing Security Property:" + del_p );
-        			this.sps_repository.removeSecurityProperty(del_p);
+        			this.spdm_service.fetchRepository().removeSecurityProperty(del_p);
         			break;
         		}
         		
@@ -209,6 +222,46 @@ public class CommandLineService {
         } catch (Exception e) {
             e.printStackTrace(out);
         }
+    }
+
+
+    /**
+     * Delete an exisiting SecurityProperty command.
+     * @param out
+     * @param args
+     */
+    public void getsp(PrintWriter out, String... args) {
+        
+    	if (args == null || args.length != 1) {
+            out.println("Security Property ID param is missed");
+            return;
+        }
+            
+    	String sp_id = args[0].trim();
+        ISecurityProperty securityProperty = this.spdm_service.getSecurityProperty(sp_id);
+        out.println("SecurityProperty ID: " + sp_id);
+        
+        out.println("SecurityProperty: " + securityProperty);
+  //      this.spdm_service.print_sp_entries();
+    }
+
+    /**
+     * Delete an exisiting SecurityProperty command.
+     * @param out
+     * @param args
+     */
+    public void getws(PrintWriter out, String... args) {
+        
+    	if (args == null || args.length != 1) {
+            out.println("Service ID param is missed");
+            return;
+        }
+            
+    	String ws_id = args[0].trim();
+        IWebService service = this.spdm_service.getService(ws_id);
+   
+        out.println("Service: " + service);
+//        this.spdm_service.print_ws_entries();
     }
 
 
@@ -224,7 +277,7 @@ public class CommandLineService {
  //       }
         try {
         	System.out.println("Registering Default Security Properties");
-    		this.sps_repository.registerService(this.web_service, this.security_descriptor);
+        	this.spdm_service.registerService(this.web_service, this.security_descriptor);
 
   
         } catch (Exception e) {

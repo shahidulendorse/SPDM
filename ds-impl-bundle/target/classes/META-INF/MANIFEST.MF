@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Export-Package: eu.aniketos.wp3.components.spdm.ds.impl;uses:="org.apa
+ che.commons.collections.iterators,eu.aniketos.wp3.components.spdm.ds.
+ api,org.apache.commons.lang.builder,eu.aniketos.data,javax.persistenc
+ e,org.osgi.service.component";version="1.0.0.SNAPSHOT"
+Service-Component: OSGI-INF/serviceComponents.xml
+Built-By: afareed
+Tool: Bnd-0.0.255
+Bundle-Name: eu.aniketos.wp3.components.spdm.ds-impl-bundle [eu.aniket
+ os.wp3.components.spdm.ds.impl]
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.6.0_33
+Bundle-Version: 1.0.0.SNAPSHOT
+Bnd-LastModified: 1354123664116
+Bundle-ManifestVersion: 2
+Bundle-Description: Generated using Pax-Construct
+Import-Package: eu.aniketos.data;version="1.0.0.SNAPSHOT",eu.aniketos.
+ wp3.components.spdm.ds.api;version="1.0.0.SNAPSHOT",eu.aniketos.wp3.c
+ omponents.spdm.ds.impl;version="1.0.0.SNAPSHOT",javax.persistence;ver
+ sion="2.0",org.apache.commons.collections.iterators;version="3.2",org
+ .apache.commons.lang.builder;version="2.6",org.osgi.service.component
+ ;version="1.1"
+Bundle-SymbolicName: eu.aniketos.wp3.components.spdm.ds-impl-bundle
+

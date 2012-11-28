@@ -66,16 +66,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     <module>provision</module>
     <module>ds-api-bundle</module>
     <module>ds-impl-bundle</module>
-    <!--    <module>ds-test-bundle</module> -->
+    <module>ds-test-bundle</module>
     <module>ds-datatype-bundle</module>
-    <!--    <module>ds-dao-bundle</module> -->
-  <!--  <module>driver-bundle</module>
-       <module>persistence-model</module>
-          <module>ui-bundle</module> 
-     -->
     <module>ds-spdm-bundle</module>
     <module>ds-console-bundle</module>
-<!--    <module>ds-certifier-bundle</module> -->
   </modules>
 
   <build>
@@ -93,38 +87,11 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         <version>1.5</version>
         <configuration>
           <framework>felix</framework>
-          <provision>
-            <param>--log=error</param>
-            <param>--workingDirectory=target/runner</param>
-            <param>--vmOptions=-Dderby.system.home=.</param>
-            <param>mvn:org.apache.geronimo.specs/geronimo-jpa_2.0_spec/1.1</param>
-            <param>mvn:org.apache.derby/derby/10.8.1.2</param>
-            <param>mvn:commons-collections/commons-collections/3.2.1</param>
-            <param>mvn:commons-pool/commons-pool/1.5.5</param>
-            <param>mvn:commons-dbcp/commons-dbcp/1.4</param>
-            <param>mvn:commons-lang/commons-lang/2.6</param>
-            <param>mvn:org.apache.openjpa/openjpa/2.1.0</param>
-            <param>mvn:org.slf4j/slf4j-api/1.6.1</param>
-            <param>mvn:org.slf4j/slf4j-simple/1.6.1@nostart</param>
-            <param>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.serp/1.13.1_3</param>
-            <param>mvn:org.apache.aries/org.apache.aries.util/0.3</param>
-            <param>mvn:org.apache.aries.jpa/org.apache.aries.jpa.api/0.3</param>
-            <param>mvn:org.apache.aries.jpa/org.apache.aries.jpa.container/0.3</param>
-            <param>mvn:org.apache.aries.transaction/org.apache.aries.transaction.manager/0.3</param>
-          </provision>
         </configuration>
         <executions>
-          <!--
-           | uncomment to auto-generate IDE files
-          <execution>
-            <id>ide-support</id>
-            <goals>
-              <goal>eclipse</goal>
-            </goals>
-          </execution>
-          -->
         </executions>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -147,6 +114,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
           </execution>
         </executions>
       </plugin>
+
       <!-- Bundle Plugins plus for Log Service -->
       
       <!--  Karaf Features.xml
@@ -174,17 +142,21 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
   <dependencies>
 
+
     <dependency>
       <groupId>org.apache.felix</groupId>
       <artifactId>org.osgi.compendium</artifactId>
       <version>1.4.0</version>
     </dependency>
 
-    <dependency>
-	<groupId>org.ops4j.pax.web</groupId>
-	<artifactId>pax-web-api</artifactId>
-	<version>1.1.3</version>
+
+<dependency>
+	<groupId>org.apache.geronimo.specs</groupId>
+	<artifactId>geronimo-servlet_2.5_spec</artifactId>
+	<version>1.2</version>
 </dependency>
+            
+            
 
 <!--            
 <dependency>
