@@ -116,15 +116,15 @@ public class CommandLineService {
     	out.println("=========================================================");
     		out.println(" 	  SPDM Console Client Service                ");
     		out.println("=========================================================");
-    		out.println( index++ + "." + " lssp,lssp - List registered Security Properties.");
-    		out.println( index++ + "." + " lsws,lsws - List registered services.");
-    		out.println( index++ + "." + " delsp,delsp <id> - delete Security Property.");
-    		out.println( index++ + "." + " getsp,getsp <id> - search Security Property by ID.");
-    		out.println( index++ + "." + " getws,getws <id> - search Service by ID.");
-    				out.println( index++ + "." + " unregister,unregister - unregister services.");
-    								out.println( index++ + "." + " cache,cache - Nr. of Entries in SPDM Repository.");
-    								out.println( index++ + "." + " register,register - registering Service & Security Descriptor.");
-    												out.println( index++ + "." + " commands,commands - List supported commands.");
+    		out.println( index++ + "." + " lssp - List registered Security Properties.");
+    		out.println( index++ + "." + " lsws - List registered services.");
+    		out.println( index++ + "." + " delsp <id> - delete Security Property.");
+    		out.println( index++ + "." + " getsp <id> - search Security Property by ID.");
+    		out.println( index++ + "." + " getws <id> - search Service by ID.");
+    				out.println( index++ + "." + " unregister - unregister services.");
+    								out.println( index++ + "." + " cache - Nr. of Entries in SPDM Repository.");
+    								out.println( index++ + "." + " register - registering Service & Security Descriptor.");
+    												out.println( index++ + "." + " commands - List supported commands.");
     	    out.println("---------------------------------------------------------");
     }
     
@@ -240,8 +240,11 @@ public class CommandLineService {
     	String sp_id = args[0].trim();
         ISecurityProperty securityProperty = this.spdm_service.getSecurityProperty(sp_id);
         out.println("SecurityProperty ID: " + sp_id);
-        
-        out.println("SecurityProperty: " + securityProperty);
+        if(securityProperty != null) {
+            out.println("SecurityProperty: " + securityProperty);        	
+        } else {
+        	out.println("SecurityProperty: []");
+        }
   //      this.spdm_service.print_sp_entries();
     }
 
@@ -260,7 +263,11 @@ public class CommandLineService {
     	String ws_id = args[0].trim();
         IWebService service = this.spdm_service.getService(ws_id);
    
-        out.println("Service: " + service);
+        if(service != null) {
+        	out.println("Service: " + service);
+        }else {
+        	out.println("Service: []");
+        }
 //        this.spdm_service.print_ws_entries();
     }
 
