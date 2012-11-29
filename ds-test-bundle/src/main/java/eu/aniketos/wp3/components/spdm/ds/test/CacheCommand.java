@@ -70,7 +70,6 @@ public class CacheCommand extends OsgiCommandSupport implements BundleActivator 
 	//	System.out.println("Bundle Contex: " + this.bc);
 		ServiceReference spdm_serviceReference = this.bundleContext.getServiceReference(ISPDMService.class.getName());
 		this.spdm_service = (ISPDMService) this.bundleContext.getService(spdm_serviceReference);
-		System.out.println("SPDM Cache Size:"+ this.spdm_service.cache_size());
 		
 		System.out.println("SPDM Cache Size : "+ this.spdm_service.cache_size());
 		System.out.println("SPDM Cache @@@ ");
