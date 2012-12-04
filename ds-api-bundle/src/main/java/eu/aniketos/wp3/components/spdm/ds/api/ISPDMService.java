@@ -35,6 +35,8 @@ public interface ISPDMService {
 	 
 	 public abstract Set<ISecurityProperty> getProperties(IWebService service, SPState propertyState); 
 	 
+	 public abstract ISecurityProperty getSecurityProperty(String serviceID, String sp_id);
+	 
 	 public abstract ISecurityProperty getSecurityProperty(String sp_id);
 	 
 	 public abstract IWebService getService(String service_id);

@@ -320,6 +320,21 @@ public class SPDMService implements ISPDMService {
 		 return this.sps_repository.getSecurityProperty(sp_id);
 	 }
 	
+	 public ISecurityProperty getSecurityProperty(String serviceID, String sp_id) {
+		 
+		 ISecurityProperty the_sp = this.sps_repository.getSecurityProperty(sp_id);
+		 IWebService web_service = this.sps_repository.getService(serviceID);
+
+		 Set<ISecurityProperty> properties = this.lookUpSecurityProperty(web_service);
+		 
+		 for(ISecurityProperty sp: properties) {
+			 if(sp == the_sp){
+				 return sp;
+			 }
+		 }
+		 return null;
+	 }
+
 	 public IWebService getService(String service_id) {
 		return this.sps_repository.getService(service_id);  
 	 }
