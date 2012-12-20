@@ -124,7 +124,7 @@ public class CommandLineService {
     				out.println( index++ + "." + " unregister - unregister services.");
     								out.println( index++ + "." + " cache - Nr. of Entries in SPDM Repository.");
     								out.println( index++ + "." + " register - registering Service & Security Descriptor.");
-    								out.println( index++ + "." + "persist - Persisting the Entries of SPDM.");
+    						//		out.println( index++ + "." + "persist - Persisting the Entries of SPDM.");
     												out.println( index++ + "." + " commands - List supported commands.");
     	    out.println("---------------------------------------------------------");
     }
