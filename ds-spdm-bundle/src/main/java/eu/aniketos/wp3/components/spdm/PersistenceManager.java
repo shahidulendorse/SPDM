@@ -154,7 +154,7 @@ public class PersistenceManager implements IPersistenceManager {
                EntityManagerFactory emf = (EntityManagerFactory) this.bc.getService(reference);
 
         	   EntityManager em = emf.createEntityManager();     	
-        	   EntityTransaction transaction = em.getTran5saction();
+        	   EntityTransaction transaction = em.getTransaction();
 
         	   try{
         		   transaction.begin();                                                        
