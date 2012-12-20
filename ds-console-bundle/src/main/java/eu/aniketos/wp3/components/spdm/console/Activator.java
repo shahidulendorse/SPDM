@@ -56,6 +56,8 @@ public class Activator implements BundleActivator {
 
         					{"register","register,register - registering Service & Security Descriptor."},
         							{"cache","cache,cache - Nr. of Entries in SPDM Repository."},
+        							{"persist","persist,persist - Persisting the Entries of SPDM."},
+
         								{"commands","commands,commands - List supported commands."}});
         
         serviceRegistration = context.registerService(CommandLineService.class.getName(), new CommandLineService(context), props);

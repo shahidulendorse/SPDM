@@ -26,6 +26,7 @@ public interface ISPDMService {
 
 	 
 	 public abstract void registerService(IWebService service, ISecurityProperty sp);
+	 
 	 public abstract void registerService(IWebService service, ISecurityDescriptor sd);
 
 	 public abstract void unregisterService(IWebService service);

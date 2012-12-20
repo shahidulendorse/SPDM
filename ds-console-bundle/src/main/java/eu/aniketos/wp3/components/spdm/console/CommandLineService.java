@@ -124,6 +124,7 @@ public class CommandLineService {
     				out.println( index++ + "." + " unregister - unregister services.");
     								out.println( index++ + "." + " cache - Nr. of Entries in SPDM Repository.");
     								out.println( index++ + "." + " register - registering Service & Security Descriptor.");
+    								out.println( index++ + "." + "persist - Persisting the Entries of SPDM.");
     												out.println( index++ + "." + " commands - List supported commands.");
     	    out.println("---------------------------------------------------------");
     }
@@ -137,6 +138,21 @@ public class CommandLineService {
     	try{
     		System.out.println("Repository Size : "+ this.spdm_service.cache_size());
     		this.spdm_service.print_repository();
+    	//	this.spdm_service.persist_cache();
+         } catch (Exception e) {
+    			e.printStackTrace(out);
+        }
+    }
+
+    /**
+     * Help command which list the commands descriptions
+     * @param out
+     * @param args
+     */
+    public void persist(PrintWriter out, String... args) {
+    	try{
+    		System.out.println("Repository Size : "+ this.spdm_service.cache_size());
+    		this.spdm_service.persist_cache();
          } catch (Exception e) {
     			e.printStackTrace(out);
         }

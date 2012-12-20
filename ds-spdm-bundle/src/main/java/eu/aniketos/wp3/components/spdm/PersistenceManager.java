@@ -81,6 +81,7 @@ public class PersistenceManager implements IPersistenceManager {
 	@Activate
 	protected void activatePersistenceManager(ComponentContext componentContext) {
 		this.bc = componentContext.getBundleContext();
+
 	}
 
 	@Deactivate
@@ -153,7 +154,7 @@ public class PersistenceManager implements IPersistenceManager {
                EntityManagerFactory emf = (EntityManagerFactory) this.bc.getService(reference);
 
         	   EntityManager em = emf.createEntityManager();     	
-        	   EntityTransaction transaction = em.getTransaction();
+        	   EntityTransaction transaction = em.getTran5saction();
 
         	   try{
         		   transaction.begin();                                                        
